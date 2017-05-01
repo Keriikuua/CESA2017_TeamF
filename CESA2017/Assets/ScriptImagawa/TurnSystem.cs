@@ -43,9 +43,9 @@ public class TurnSystem : MonoBehaviour {
         //デバッグコマンド
         if (Input.GetKeyDown(KeyCode.Return)){
             turnstate++;
-            if(turnstate < TurnState.nBattlePhase){
-                turnstate = TurnState.nNone;
-            }
+            //if(turnstate < TurnState.nBattlePhase){
+            //    turnstate = TurnState.nNone;
+            //}
         }
 
     }
