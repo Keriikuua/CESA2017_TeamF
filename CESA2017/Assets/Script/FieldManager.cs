@@ -14,10 +14,15 @@ public class FieldManager : MonoBehaviour
     // Use this for initialization
     void Start () {
         Create();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        Debug.Log(prefab.transform.localScale.x);
+        Debug.Log(prefab.transform.localScale.z);
+        Debug.Log(prefab.transform.lossyScale.x);
+        Debug.Log(prefab.transform.lossyScale.z);
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 

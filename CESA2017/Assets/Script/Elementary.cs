@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// フィールドデータクラス
-public class FieldData : MonoBehaviour {
-
-    protected Transform m_FieldPos;
+// 素クラス
+public class Elementary : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
