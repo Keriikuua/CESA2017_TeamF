@@ -45,4 +45,11 @@ public class FieldManager : MonoBehaviour
             FieldList.Add(Data);
         }
     }
+
+    public Vector3 SetMyCharaPos(){
+        GameObject obj = FieldList[m_nHeight - 1][m_nWidth / 2];
+        Debug.Log(obj.transform.position);
+        return obj.transform.position;
+    }
+
 }
