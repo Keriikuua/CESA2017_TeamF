@@ -78,8 +78,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\Chara.cs" />
+    <Compile Include="Assets\Script\CharaData.cs" />
+    <Compile Include="Assets\Script\CharaList.cs" />
     <Compile Include="Assets\Script\FieldData.cs" />
     <Compile Include="Assets\Script\FieldManager.cs" />
+    <Compile Include="Assets\ScriptImagawa\TurnSystem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
