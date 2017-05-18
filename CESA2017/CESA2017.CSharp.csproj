@@ -84,6 +84,7 @@
     <Compile Include="Assets\Script\Convair.cs" />
     <Compile Include="Assets\Script\DeleteArea.cs" />
     <Compile Include="Assets\Script\Elementary.cs" />
+    <Compile Include="Assets\Script\Fever.cs" />
     <Compile Include="Assets\Script\FieldData.cs" />
     <Compile Include="Assets\Script\FieldManager.cs" />
     <Compile Include="Assets\Script\Mold.cs" />
