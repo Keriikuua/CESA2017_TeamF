@@ -12,7 +12,7 @@ public class FieldManager : MonoBehaviour
     private List<List<GameObject>> FieldList = new List<List<GameObject>>();   // フィールドデータ格納の2次元リスト 
 
     // Use this for initialization
-    void Start () {
+    void  Awake() {
         Create();
 	}
 	
@@ -48,7 +48,25 @@ public class FieldManager : MonoBehaviour
 
     public Vector3 SetMyCharaPos(){
         GameObject obj = FieldList[m_nHeight - 1][m_nWidth / 2];
-        Debug.Log(obj.transform.position);
+        
+        return obj.transform.position;
+    }
+
+    public Vector3 SetMyRightCharaPos()
+    {
+        GameObject obj = FieldList[m_nHeight - 1][m_nWidth - 1];
+        return obj.transform.position;
+    }
+
+    public Vector3 SetMyLeftCharaPos()
+    {
+        GameObject obj = FieldList[m_nHeight - 1][0];
+        return obj.transform.position;
+    }
+
+    public Vector3 SetEnemyStartPos()
+    {
+        GameObject obj = FieldList[0][m_nWidth / 2];
         return obj.transform.position;
     }
 

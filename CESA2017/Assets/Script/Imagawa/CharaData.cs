@@ -40,15 +40,15 @@ public class CharaData : MonoBehaviour {
 
     //プランナーの仕事場
     void InputData(){
-        charaArray[0].nHP = 1;
+        charaArray[0].nHP = 2;
         charaArray[0].nAttack = 2;
-        charaArray[0].nWeakness = 3;
+        charaArray[0].nWeakness = 0;
 
-        charaArray[1].nHP = 10;
-        charaArray[1].nAttack = 20;
-        charaArray[1].nWeakness = 30;
+        charaArray[1].nHP = 2;
+        charaArray[1].nAttack = 2;
+        charaArray[1].nWeakness = 0;
 
-        charaArray[2].nHP = 100;
+        charaArray[2].nHP = 10;
         charaArray[2].nAttack = 200;
         charaArray[2].nWeakness = 300;
 
