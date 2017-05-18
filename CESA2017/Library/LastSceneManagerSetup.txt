@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/Test_Takahashi.unity
+- path: Assets/Scene/Imagawa.unity
   isLoaded: 1
   isActive: 1
