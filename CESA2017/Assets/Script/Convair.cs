@@ -10,14 +10,18 @@ public class Convair : MonoBehaviour {
     [SerializeField, Header("素の生成位置")]
     Vector3 CreatePos;
 
-    [SerializeField, Header("素が流れる速さ")]
-    Vector3 Speed;
-
     [SerializeField, Header("素が生成される速さ")]
-    float CreateSpeed;
+    float fDefaultCreateSpeed;
+
+    [SerializeField, Header("フィーバー中に素が生成される速さ")]
+    float fFeverCreateSpeed;
+
+    [SerializeField, Header("フィーバー")]
+    Fever fever;
 
     // 生成した素の管理用リスト 
     private List<GameObject> ElementaryList = new List<GameObject>();
+    private float CreateSpeed;
 
     // 
     IEnumerator MainStart()
@@ -32,6 +36,7 @@ public class Convair : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        CreateSpeed = fDefaultCreateSpeed;
         StartCoroutine("MainStart");
     }
 	
@@ -44,8 +49,16 @@ public class Convair : MonoBehaviour {
                 ElementaryList.RemoveAt(nCnt);
                 continue;
             }
+        }
 
-            ElementaryList[nCnt].transform.position += Speed;
+        // フィーバー中なら
+        if (fever.GetFeverMode())
+        {
+            CreateSpeed = fFeverCreateSpeed;
+        }
+        else
+        {
+            CreateSpeed = fDefaultCreateSpeed;
         }
     }
 
