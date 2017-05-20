@@ -35,6 +35,9 @@ public class Mold : MonoBehaviour {
     [SerializeField, Header("フィーバーゲージ")]
     Fever fever;
 
+    [SerializeField, Header("キャラ生成用")]
+    Character chara;
+
     private Vector3 InitPos;
     private MoldMode mode;
     private float BestZone;
@@ -115,21 +118,27 @@ public class Mold : MonoBehaviour {
         // Best判定
         if ((ScaleX - BadZone) - GoodZone > HitZone && (ScaleX - BadZone) - GoodZone - BestZone < HitZone)
         {
+            Debug.Log("best");
             fever.PlusGauge(2);
+            chara.CreatePlayer(MoldType, 1);
             return 1;
         }
 
         // Good判定
         if ((ScaleX - BadZone) > HitZone && (ScaleX - BadZone) - GoodZone <HitZone)
-        {   
+        {
+            Debug.Log("good");
             fever.PlusGauge(1);
+            chara.CreatePlayer(MoldType, 2);
             return 2;
         }
 
         // Bad判定
         //if (ScaleX > HitZone && (ScaleX - BadZone) < HitZone)
         //{
+        Debug.Log("bad");
         fever.PlusGauge(0);
+        chara.CreatePlayer(MoldType, 3);
         return 3;
         //}
         //return 0;
