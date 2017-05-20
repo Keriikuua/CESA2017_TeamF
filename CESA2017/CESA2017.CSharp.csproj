@@ -78,18 +78,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\Chara.cs" />
-    <Compile Include="Assets\Script\CharaData.cs" />
-    <Compile Include="Assets\Script\CharaList.cs" />
     <Compile Include="Assets\Script\Convair.cs" />
     <Compile Include="Assets\Script\DeleteArea.cs" />
     <Compile Include="Assets\Script\Elementary.cs" />
     <Compile Include="Assets\Script\Fever.cs" />
     <Compile Include="Assets\Script\FieldData.cs" />
     <Compile Include="Assets\Script\FieldManager.cs" />
+    <Compile Include="Assets\Script\Imagawa\CharaData.cs" />
+    <Compile Include="Assets\Script\Imagawa\CharaList.cs" />
+    <Compile Include="Assets\Script\Imagawa\Character.cs" />
+    <Compile Include="Assets\Script\Imagawa\DebugButton.cs" />
+    <Compile Include="Assets\Script\Imagawa\EnemyScr.cs" />
+    <Compile Include="Assets\Script\Imagawa\PlayerScr.cs" />
+    <Compile Include="Assets\Script\Imagawa\StageForm.cs" />
+    <Compile Include="Assets\Script\Imagawa\TurnSystem.cs" />
     <Compile Include="Assets\Script\Mold.cs" />
     <Compile Include="Assets\Script\Type.cs" />
-    <Compile Include="Assets\ScriptImagawa\TurnSystem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

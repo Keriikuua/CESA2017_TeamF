@@ -6,7 +6,7 @@ public class PlayerScr : MonoBehaviour {
 
     public int nHP;
     public int nAttack;
-    public int nWeaknes;
+    public Type.Chara m_Type;
 
     Vector3 bPlayerGoPos;             //最初に向かう座標をいれる
     bool bGoFlg;
@@ -68,11 +68,11 @@ public class PlayerScr : MonoBehaviour {
     }
 
     //プレイヤーがどっちに行くか決める＆ステータス格納
-    public void PlayerSwitch(Vector3 pos,int hp,int attack,int weake){
+    public void PlayerSwitch(Vector3 pos,int hp,int attack,Type.Chara type){
         bPlayerGoPos = pos;
         nHP = hp;
         nAttack = attack;
-        nWeaknes = weake;
+        m_Type = type;
         
         bGoFlg = turnsystem.MoveDecision(this.gameObject);
     }

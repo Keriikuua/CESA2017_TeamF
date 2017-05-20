@@ -7,9 +7,10 @@ public class Character : MonoBehaviour {
     //キャラステータス
     int nHP;
     int nAttack;
-    int nWeakness;
+    //int nWeakness;
     int nCharaNum;
     bool bCharaSwitch;
+    Type.Chara m_Type;
 
     
     Vector3 MyStartCharaPos;                //自キャラの初期位置
@@ -35,8 +36,9 @@ public class Character : MonoBehaviour {
         nHP = 0;
         nAttack = 0;
         nCharaNum = 0;
-        nWeakness = 0;
+        //nWeakness = 0;
         bCharaSwitch = false;
+        m_Type = Type.Chara.Nothing;
         MyStartCharaPos = Vector3.zero;
 
         MyHeadforCharaPos[0] = Vector3.zero;
@@ -60,10 +62,10 @@ public class Character : MonoBehaviour {
     void Update(){
         if (Input.GetKeyDown(KeyCode.P)){
             GetData(nCharaNum);
-            CharaForm();
+            CharaForm(Type.Chara.A);
             Debug.Log(nHP);
             Debug.Log(nAttack);
-            Debug.Log(nWeakness);
+            Debug.Log(m_Type);
             nCharaNum++;
 
             if(nCharaNum >= 2){
@@ -78,26 +80,25 @@ public class Character : MonoBehaviour {
     void GetData(int Num){
         nHP = charadata.HPReturn(Num);
         nAttack = charadata.AttackReturn(Num);
-        nWeakness = charadata.WeakReturn(Num);
-        
+        m_Type = charadata.TypeReturn(Num);
     }
 
     //キャラ生成
-    void CharaForm(){
+    void CharaForm(Type.Chara type){
         GameObject Obj;
         switch (nCharaNum){    
             case 0:
                 Obj =  Instantiate(MyCharaTest, MyStartCharaPos, Quaternion.identity)as GameObject;
                 playerscr = Obj.GetComponent<PlayerScr>();
                 charalist.PlayerCharaPut(Obj);             
-                playerscr.PlayerSwitch(MyHeadforCharaPos[nJud],nHP,nAttack,nWeakness);
+                playerscr.PlayerSwitch(MyHeadforCharaPos[nJud],nHP,nAttack,type);
                 
                 nJud++;
             break;
             case 1:
                 Obj = Instantiate(MyCharaTest, MyStartCharaPos, Quaternion.identity) as GameObject;
                 playerscr = Obj.GetComponent<PlayerScr>();
-                playerscr.PlayerSwitch(MyHeadforCharaPos[nJud], nHP, nAttack, nWeakness);
+                playerscr.PlayerSwitch(MyHeadforCharaPos[nJud], nHP, nAttack, type);
                 charalist.PlayerCharaPut(Obj);
                 nJud++;
             break;
@@ -115,7 +116,7 @@ public class Character : MonoBehaviour {
                 obj = Instantiate(Enemy1Obj, EnemyStartPos, Quaternion.identity) as GameObject;
                 charalist.EnemyCharaPut(obj);
                 GetData(num);
-                obj.GetComponent<EnemyScr>().Status(nHP, nAttack, nWeakness, MyStartCharaPos);
+                obj.GetComponent<EnemyScr>().Status(nHP, nAttack, m_Type, MyStartCharaPos);
                 return obj;
         }
         return null;
@@ -129,13 +130,30 @@ public class Character : MonoBehaviour {
         Enemy1Obj = (GameObject)Resources.Load("Enemy/Enemy1");
     }
 
+    // プレイヤーを外部から生成
+    public void CreatePlayer(Type.Chara type , int nStrong)
+    {
+        switch (nStrong)
+        {
+            case 0:
+                GetData(0);
+                break;
+            case 1:
+                GetData(1);
+                break;
+            case 2:
+                GetData(2);
+                break;
+        }
+        CharaForm(type);
+    }
 
     public void DebugChara(){
         GetData(nCharaNum);
-        CharaForm();
+        CharaForm(Type.Chara.A);
         Debug.Log(nHP);
         Debug.Log(nAttack);
-        Debug.Log(nWeakness);        
+        Debug.Log(m_Type);        
 
         nCharaNum++;
 

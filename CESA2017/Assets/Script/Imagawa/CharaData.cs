@@ -8,7 +8,7 @@ public class CharaData : MonoBehaviour {
     public struct CharaDataArray{
         public int nHP;
         public int nAttack;
-        public int nWeakness;
+        public Type.Chara type;
     }
 
     CharaDataArray[] charaArray;
@@ -34,35 +34,35 @@ public class CharaData : MonoBehaviour {
         return charaArray[Number].nHP;
     }
 
-    public int WeakReturn(int Number){
-        return charaArray[Number].nWeakness;
+    public Type.Chara TypeReturn(int Number){
+        return charaArray[Number].type;
     }
 
     //プランナーの仕事場
     void InputData(){
         charaArray[0].nHP = 2;
         charaArray[0].nAttack = 2;
-        charaArray[0].nWeakness = 0;
+        charaArray[0].type = Type.Chara.A;
 
         charaArray[1].nHP = 2;
         charaArray[1].nAttack = 2;
-        charaArray[1].nWeakness = 0;
+        charaArray[1].type = Type.Chara.B;
 
         charaArray[2].nHP = 10;
         charaArray[2].nAttack = 200;
-        charaArray[2].nWeakness = 300;
+        charaArray[2].type = Type.Chara.C;
 
         charaArray[3].nHP = 1000;
         charaArray[3].nAttack = 2000;
-        charaArray[3].nWeakness = 3000;
+        charaArray[3].type = Type.Chara.A;
 
         charaArray[4].nHP = 10000;
         charaArray[4].nAttack = 20000;
-        charaArray[4].nWeakness = 30000;
+        charaArray[4].type = Type.Chara.A;
 
         charaArray[5].nHP = 100000;
         charaArray[5].nAttack = 200000;
-        charaArray[5].nWeakness = 300000;
+        charaArray[5].type = Type.Chara.A;
     }
 
 

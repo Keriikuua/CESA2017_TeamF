@@ -6,7 +6,7 @@ public class EnemyScr : MonoBehaviour {
 
     public int nHp;
     public int nAtack;
-    public int nWeaknes;
+    public Type.Chara m_Type;
     Vector3 GoalPos;
 
     private void Start()
@@ -22,11 +22,11 @@ public class EnemyScr : MonoBehaviour {
         }
     }
 
-    public void Status(int nhp,int nattack,int nweaknes,Vector3 goal)
+    public void Status(int nhp,int nattack,Type.Chara type,Vector3 goal)
     {
         nHp = nhp;
         nAtack = nattack;
-        nWeaknes = nweaknes;
+        m_Type = type;
         GoalPos = goal;
     }
 
