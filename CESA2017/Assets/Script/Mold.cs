@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 // 型クラス
 public class Mold : MonoBehaviour {
@@ -38,14 +39,21 @@ public class Mold : MonoBehaviour {
     [SerializeField, Header("キャラ生成用")]
     Character chara;
 
-    private Vector3 InitPos;
-    private MoldMode mode;
-    private float BestZone;
-    private BoxCollider Collider;
-    private float distance = 100f;
+    [SerializeField, Header("型で挟んで止まる時間"), Range(0.1f,1.0f)]
+    float fStopTime = 0.5f;
+
+    [SerializeField, Header("パーティクルスクリプト")]
+    MoldParticle particle;
+
+    private Vector3 InitPos;        // 初期位置
+    private MoldMode mode;          // 型の遷移状態
+    private float BestZone;         // Best判定ゾーン
+    private BoxCollider Collider;   // 型のCollider
+    private float distance = 100f;  // 距離
 
     // Use this for initialization
     void Start () {
+        // 変数初期化
         mode = MoldMode.None;
         InitPos = transform.position;
         Collider = transform.GetComponent<BoxCollider>();
@@ -83,13 +91,18 @@ public class Mold : MonoBehaviour {
                 break;
 
             case MoldMode.Down:
-                if (transform.position.y > obj.transform.position.y + (transform.localScale.y * 1.5f))
+                if (transform.position.y > obj.transform.position.y + (transform.localScale.y * 1.1f))
                     transform.position -= new Vector3(0, fSpeed, 0);
                 else
-                    mode = MoldMode.Up;
+                    mode = MoldMode.Stop;
                 break;
 
             case MoldMode.Stop:
+                // 落とした型を止める
+                StartCoroutine(DelayMethod(fStopTime, () =>
+                {
+                    mode = MoldMode.Up;
+                }));
                 break;
 
             case MoldMode.Up:
@@ -103,6 +116,7 @@ public class Mold : MonoBehaviour {
         }
     }
 
+    // 型と素材の当たり判定
     public int HitCollider(Transform hitObj)
     {
         if (fever.GetFeverMode())   // Fever中なら
@@ -111,15 +125,21 @@ public class Mold : MonoBehaviour {
             return 1;
         }
 
+        // 格納変数
         float PosX = transform.position.x;
         float ScaleX = Collider.size.x;
         float HitZone = Mathf.Abs(hitObj.position.x - PosX);
 
+        int nBest = 2;
+        int nGood = 1;
+        int nBad = 0;
+
         // Best判定
         if ((ScaleX - BadZone) - GoodZone > HitZone && (ScaleX - BadZone) - GoodZone - BestZone < HitZone)
         {
-            Debug.Log("best");
-            fever.PlusGauge(2);
+            //Debug.Log("best");
+            particle.PlayParticle(nBest);
+            fever.PlusGauge(nBest);
             chara.CreatePlayer(MoldType, 1);
             return 1;
         }
@@ -127,8 +147,9 @@ public class Mold : MonoBehaviour {
         // Good判定
         if ((ScaleX - BadZone) > HitZone && (ScaleX - BadZone) - GoodZone <HitZone)
         {
-            Debug.Log("good");
-            fever.PlusGauge(1);
+            //Debug.Log("good");
+            particle.PlayParticle(nGood);
+            fever.PlusGauge(nGood);
             chara.CreatePlayer(MoldType, 2);
             return 2;
         }
@@ -136,16 +157,30 @@ public class Mold : MonoBehaviour {
         // Bad判定
         //if (ScaleX > HitZone && (ScaleX - BadZone) < HitZone)
         //{
-        Debug.Log("bad");
-        fever.PlusGauge(0);
+        //Debug.Log("bad");
+        particle.PlayParticle(nBad);
+        fever.PlusGauge(nBad);
         chara.CreatePlayer(MoldType, 3);
         return 3;
         //}
         //return 0;
     }
 
+    // 型のタイプ取得
     public Type.Chara GetType()
     {
         return MoldType;
+    }
+    
+    /// <summary>
+    /// 渡された処理を指定時間後に実行する
+    /// </summary>
+    /// <param name="waitTime">遅延時間[ミリ秒]</param>
+    /// <param name="action">実行したい処理</param>
+    /// <returns></returns>
+    private IEnumerator DelayMethod(float waitTime, Action action)
+    {
+        yield return new WaitForSeconds(waitTime);
+        action();
     }
 }
