@@ -17,7 +17,19 @@ public class CharaList : MonoBehaviour {
     }
 
     void Update(){
-        
+        for(int i = 0;i < PlayerList.Count; i++){
+            if(PlayerList[i] == null){
+                PlayerList.RemoveAt(i);
+            }
+        }
+
+        for (int i = 0; i < EnemyList.Count; i++)
+        {
+            if (EnemyList[i] == null)
+            {
+                EnemyList.RemoveAt(i);
+            }
+        }
     }
 
 

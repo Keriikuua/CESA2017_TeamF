@@ -88,11 +88,13 @@
     <Compile Include="Assets\Script\Imagawa\CharaList.cs" />
     <Compile Include="Assets\Script\Imagawa\Character.cs" />
     <Compile Include="Assets\Script\Imagawa\DebugButton.cs" />
+    <Compile Include="Assets\Script\Imagawa\Endurance.cs" />
     <Compile Include="Assets\Script\Imagawa\EnemyScr.cs" />
     <Compile Include="Assets\Script\Imagawa\PlayerScr.cs" />
     <Compile Include="Assets\Script\Imagawa\StageForm.cs" />
     <Compile Include="Assets\Script\Imagawa\TurnSystem.cs" />
     <Compile Include="Assets\Script\Mold.cs" />
+    <Compile Include="Assets\Script\MoldParticle.cs" />
     <Compile Include="Assets\Script\Type.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

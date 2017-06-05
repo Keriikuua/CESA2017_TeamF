@@ -10,8 +10,10 @@ public class PlayerScr : MonoBehaviour {
 
     Vector3 bPlayerGoPos;             //最初に向かう座標をいれる
     bool bGoFlg;
+    bool bHitFlg;
 
     TurnSystem turnsystem;
+    Rigidbody rigid;
 
     //目的地に行く
     float nowTime = 0;
@@ -19,14 +21,21 @@ public class PlayerScr : MonoBehaviour {
     Vector3 InitPos = Vector3.zero;
 
     Vector3 CenterPos;                  //真ん中の座標
+    bool MoveOKFlg = false;
     Vector3 NowPos;
     bool bcenterflg;
 
+    int nFlg;
+
     void Awake(){
         turnsystem = GameObject.Find("TurnObj").GetComponent<TurnSystem>();
+        rigid = GetComponent<Rigidbody>();
         bGoFlg = false;
         bcenterflg = false;
+        bHitFlg = false;
         InitPos = this.gameObject.transform.position;
+
+        this.gameObject.tag = "UpPlayer";
     }
 
     void Update(){
@@ -35,15 +44,17 @@ public class PlayerScr : MonoBehaviour {
             if(transform.position != bPlayerGoPos){
                 if (nowTime <= endTime){
                     float rate = nowTime / endTime;
-                    this.transform.position = Vector3.Lerp(InitPos, bPlayerGoPos, rate);
+                    transform.position = Vector3.Lerp(InitPos, bPlayerGoPos, rate);
+
                     nowTime += Time.deltaTime;
                 }else{
                     transform.position = bPlayerGoPos;
+                    rigid.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
                 }
 
             }
             else{
-                turnsystem.PlayerMoveOk(this.gameObject);
+                    turnsystem.PlayerMoveOk(this.gameObject);
 
                 bGoFlg = false;
             }
@@ -54,17 +65,14 @@ public class PlayerScr : MonoBehaviour {
             if (nowTime <= endTime)
             {
                 float rate = nowTime / endTime;
-                this.transform.position = Vector3.Lerp(NowPos, CenterPos, rate);
+                rigid.MovePosition(Vector3.Lerp(NowPos, CenterPos, rate));
                 nowTime += Time.deltaTime;
             }
             else
             {
-                transform.position = CenterPos;
+                rigid.MovePosition(CenterPos);
             }
         }
-
-
-
     }
 
     //プレイヤーがどっちに行くか決める＆ステータス格納
@@ -81,20 +89,35 @@ public class PlayerScr : MonoBehaviour {
         bGoFlg = true;
     }
 
-    public void PosZ()
+    public void PosZ(Vector3 pos,int num)
     {
-        if(transform.position.z == 0)
-        {
-            CenterPos = new Vector3(transform.position.x, transform.position.y, transform.position.z + 2);
-        }
+        CenterPos = pos;
+        nFlg = num;
+        //if(transform.position.z == 0)
+        //{
+        //    CenterPos = new Vector3(transform.position.x, transform.position.y, transform.position.z + 2);
+        //}
 
-        if (transform.position.z == 4)
-        {
-            CenterPos = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
-        }
+        //if (transform.position.z == 4)
+        //{
+        //    CenterPos = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
+        //}
         NowPos = transform.position;
         nowTime = 0;
         bcenterflg = true;
+    }
+
+    private void OnCollisionEnter(Collision coll)
+    {
+        if (!bHitFlg) {
+            if (coll.transform.tag == "UpEnemy")
+            {
+                Debug.Log("hit" + gameObject.name);
+                coll.gameObject.GetComponent<EnemyScr>().OnHit(this.gameObject);
+                bHitFlg = true;
+            }
+            
+        }
     }
 
 }

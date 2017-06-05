@@ -150,10 +150,7 @@ public class Character : MonoBehaviour {
 
     public void DebugChara(){
         GetData(nCharaNum);
-        CharaForm(Type.Chara.A);
-        Debug.Log(nHP);
-        Debug.Log(nAttack);
-        Debug.Log(m_Type);        
+        CharaForm(Type.Chara.A);   
 
         nCharaNum++;
 
