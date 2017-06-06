@@ -45,6 +45,9 @@ public class Mold : MonoBehaviour {
     [SerializeField, Header("パーティクルスクリプト")]
     MoldParticle particle;
 
+    [SerializeField, Header("タップで動く")]
+    bool bTouch = true;
+
     private Vector3 InitPos;        // 初期位置
     private MoldMode mode;          // 型の遷移状態
     private float BestZone;         // Best判定ゾーン
@@ -70,10 +73,10 @@ public class Mold : MonoBehaviour {
             case MoldMode.None:
                 // キーで挟む
                 if (Input.GetKeyDown(Botton))
-                    mode = MoldMode.Down;
+                    DownMold();
 
                 // 左クリックを取得
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && bTouch)
                 {
                     // クリックしたスクリーン座標をrayに変換
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -85,7 +88,7 @@ public class Mold : MonoBehaviour {
                         // rayが当たったオブジェクトの名前を取得
                         string objectName = hit.collider.gameObject.name;
                         if(objectName == gameObject.name)
-                            mode = MoldMode.Down;
+                            DownMold();
                     }
                 }
                 break;
@@ -119,11 +122,6 @@ public class Mold : MonoBehaviour {
     // 型と素材の当たり判定
     public int HitCollider(Transform hitObj)
     {
-        if (fever.GetFeverMode())   // Fever中なら
-        {
-            fever.PlusGauge(2);
-            return 1;
-        }
 
         // 格納変数
         float PosX = transform.position.x;
@@ -134,13 +132,20 @@ public class Mold : MonoBehaviour {
         int nGood = 1;
         int nBad = 0;
 
+        // Fever中なら
+        if (fever != null && fever.GetFeverMode())   
+        {
+            FeverPlus(nBest);
+            return 1;
+        }
+
         // Best判定
         if ((ScaleX - BadZone) - GoodZone > HitZone && (ScaleX - BadZone) - GoodZone - BestZone < HitZone)
         {
             //Debug.Log("best");
             particle.PlayParticle(nBest);
-            fever.PlusGauge(nBest);
-            chara.CreatePlayer(MoldType, 1);
+            FeverPlus(nBest);
+            CharaCreate(1);
             return 1;
         }
 
@@ -149,8 +154,8 @@ public class Mold : MonoBehaviour {
         {
             //Debug.Log("good");
             particle.PlayParticle(nGood);
-            fever.PlusGauge(nGood);
-            chara.CreatePlayer(MoldType, 2);
+            FeverPlus(nGood);
+            CharaCreate(2);
             return 2;
         }
 
@@ -159,11 +164,9 @@ public class Mold : MonoBehaviour {
         //{
         //Debug.Log("bad");
         particle.PlayParticle(nBad);
-        fever.PlusGauge(nBad);
-        chara.CreatePlayer(MoldType, 3);
+        FeverPlus(nBad);
+        CharaCreate(3);
         return 3;
-        //}
-        //return 0;
     }
 
     // 型のタイプ取得
@@ -182,5 +185,39 @@ public class Mold : MonoBehaviour {
     {
         yield return new WaitForSeconds(waitTime);
         action();
+    }
+
+    /// <summary>
+    /// 上画面にキャラを生成
+    /// </summary>
+    /// <param name="nValue">生成キャラの強さ</param>
+    /// <returns></returns>
+    private void CharaCreate(int nValue)
+    {
+        if(chara != null)
+            chara.CreatePlayer(MoldType, nValue);
+    }
+
+    /// <summary>
+    /// フィーバーゲージを増加
+    /// </summary>
+    /// <param name="nValue">追加量の指定</param>
+    /// <returns></returns>
+    private void FeverPlus(int nValue)
+    {
+        if (fever != null)
+        {
+            fever.PlusGauge(nValue);
+        }
+    }
+
+    /// <summary>
+    /// 型を落下
+    /// </summary>
+    /// <returns></returns>
+    public void DownMold()
+    {
+        if(mode == MoldMode.None)
+            mode = MoldMode.Down;
     }
 }
