@@ -52,7 +52,7 @@ public class Convair : MonoBehaviour {
         }
 
         // フィーバー中なら
-        if (fever.GetFeverMode())
+        if (fever != null && fever.GetFeverMode())
         {
             CreateSpeed = fFeverCreateSpeed;
         }
