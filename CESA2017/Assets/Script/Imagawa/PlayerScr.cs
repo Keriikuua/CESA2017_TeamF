@@ -11,100 +11,127 @@ public class PlayerScr : MonoBehaviour {
     Vector3 bPlayerGoPos;             //最初に向かう座標をいれる
     bool bGoFlg;
     bool bHitFlg;
-
+    
     TurnSystem turnsystem;
-    Rigidbody rigid;
 
     //目的地に行く
-    float nowTime = 0;
-    float endTime = 2;
-    Vector3 InitPos = Vector3.zero;
+    float nMoveNowTime;             //現在の時間
+    float nMoveEndTime;             //移動時間
+    bool bMoveOn;                   //移動開始
+    bool bMultiIn;                  //複数回入るの防止
+    Vector3 DestinationPos;         //目的地のポジション
+    Vector3 InitPos;                //移動開始する前のポジション
 
-    Vector3 CenterPos;                  //真ん中の座標
-    bool MoveOKFlg = false;
-    Vector3 NowPos;
-    bool bcenterflg;
 
-    int nFlg;
+    int nMoveCount;
 
     void Awake(){
         turnsystem = GameObject.Find("TurnObj").GetComponent<TurnSystem>();
-        rigid = GetComponent<Rigidbody>();
-        bGoFlg = false;
-        bcenterflg = false;
-        bHitFlg = false;
-        InitPos = this.gameObject.transform.position;
 
+        turnsystem.PlayerStuckIn(this.gameObject);
         this.gameObject.tag = "UpPlayer";
     }
 
+    
+    private void Start()
+    {
+        nMoveNowTime = 0;
+        nMoveEndTime = 0;
+        bMoveOn = false;
+        bMultiIn = false;
+        DestinationPos = Vector3.zero;
+        InitPos = Vector3.zero;
+
+        nMoveCount = 0;
+
+    }//初期化
+
     void Update(){
-        //最初の目的地に向かう
-        if (bGoFlg == true){
-            if(transform.position != bPlayerGoPos){
-                if (nowTime <= endTime){
-                    float rate = nowTime / endTime;
-                    transform.position = Vector3.Lerp(InitPos, bPlayerGoPos, rate);
+        MovePlayer();
 
-                    nowTime += Time.deltaTime;
-                }else{
-                    transform.position = bPlayerGoPos;
-                    rigid.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
-                }
-
-            }
-            else{
-                    turnsystem.PlayerMoveOk(this.gameObject);
-
-                bGoFlg = false;
-            }
-        }
-
-        if (bcenterflg)
+        if(transform.position.x <= 99.0f)
         {
-            if (nowTime <= endTime)
+            Destroy(this.gameObject);
+        }
+    }
+
+    
+    void MovePlayer()
+    {
+        if (bMoveOn)
+        {
+            if (nMoveNowTime <= nMoveEndTime)
             {
-                float rate = nowTime / endTime;
-                rigid.MovePosition(Vector3.Lerp(NowPos, CenterPos, rate));
-                nowTime += Time.deltaTime;
+                float rate = nMoveNowTime / nMoveEndTime;
+                this.transform.position = Vector3.Lerp(InitPos, DestinationPos, rate);
+                nMoveNowTime += Time.deltaTime;
             }
             else
             {
-                rigid.MovePosition(CenterPos);
+                turnsystem.PlayerListChange(this.gameObject);
+                nMoveNowTime = 0;
+                bMoveOn = false;
+                bMultiIn = false;
+
+                if(nMoveCount == 1)
+                {
+                    turnsystem.SutuckUIDelete();
+                    Debug.Log("koko");
+                }
+
+                if(nMoveCount == 2)
+                {
+                    RotationRiset();
+                }
             }
         }
-    }
+    }//プレイヤーの移動関係
 
-    //プレイヤーがどっちに行くか決める＆ステータス格納
-    public void PlayerSwitch(Vector3 pos,int hp,int attack,Type.Chara type){
-        bPlayerGoPos = pos;
+    
+    public void PlayerSwitch(int hp,int attack,Type.Chara type){
         nHP = hp;
         nAttack = attack;
         m_Type = type;
-        
-        bGoFlg = turnsystem.MoveDecision(this.gameObject);
-    }
+    }//ステータス格納
 
-    public void WaitClear() {
-        bGoFlg = true;
-    }
-
-    public void PosZ(Vector3 pos,int num)
+    public void MovePhasePlus(Vector3 pos, float time)
     {
-        CenterPos = pos;
-        nFlg = num;
-        //if(transform.position.z == 0)
-        //{
-        //    CenterPos = new Vector3(transform.position.x, transform.position.y, transform.position.z + 2);
-        //}
+        if (!bMultiIn)
+        {
+            DestinationPos = pos;
+            InitPos = this.transform.position;
+            nMoveEndTime = time;
+            transform.LookAt(pos);
 
-        //if (transform.position.z == 4)
-        //{
-        //    CenterPos = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
-        //}
-        NowPos = transform.position;
-        nowTime = 0;
-        bcenterflg = true;
+            bMoveOn = true;
+            bMultiIn = true;
+            nMoveCount++;
+        }
+    }//目的地とそこに移動するまでの時間を格納＆移動開始
+
+    public void RotationRiset()
+    {
+        transform.localRotation = Quaternion.Euler(0.0f, -90.0f, 0.0f);
+    }//回転のリセット
+
+    public void AnimaFlgChange()
+    {
+        this.gameObject.GetComponent<Animator>().SetBool("AttackFlg", true);
+    }
+
+    public int PlayerType()
+    {
+        switch (m_Type)
+        {
+            case Type.Chara.A:
+                return 1;
+            case Type.Chara.B:
+                return 2;
+            case Type.Chara.C:
+                return 3;
+        }
+
+        return 0;
     }
 
     private void OnCollisionEnter(Collision coll)

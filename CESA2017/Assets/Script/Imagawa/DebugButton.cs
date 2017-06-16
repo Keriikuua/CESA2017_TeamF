@@ -8,6 +8,7 @@ public class DebugButton : MonoBehaviour {
     public GameObject ParentObj1;
     public GameObject ParentObj2;
     public Text text;
+    Text TurnText;
     Text DefeatText;
     Slider slider;
     TurnSystem turnsystem;
@@ -18,7 +19,7 @@ public class DebugButton : MonoBehaviour {
         chara = ParentObj2.GetComponent<Character>();
         slider = GameObject.Find("EnduranceValue").GetComponent<Slider>();
         DefeatText = GameObject.Find("ENDTEXT").GetComponent<Text>();
-        
+        TurnText = GameObject.Find("TrunText").GetComponent<Text>();
     }
 
     private void Update()
@@ -44,6 +45,11 @@ public class DebugButton : MonoBehaviour {
             DefeatText.text = "負け";
         }
     }
+    //勝ち表示
+    public void Win()
+    {
+        DefeatText.text = "勝ち";
+    }
     //今どののターンか把握するよう
     void DebugTurn(){
         string sTurn = turnsystem.SetTurnState().ToString();
@@ -64,6 +70,11 @@ public class DebugButton : MonoBehaviour {
                 text.text = "バトル";
                 break;
         }
+    }
+    //何ターン目か表示用
+    public void TurnNum(int num)
+    {
+        TurnText.text = num.ToString();
     }
 
     //スタック全削除
