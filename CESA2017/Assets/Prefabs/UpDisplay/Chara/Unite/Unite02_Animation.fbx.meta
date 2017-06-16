@@ -1,0 +1,436 @@
+fileFormatVersion: 2
+guid: 310a664ae8ed1a84cb82b7afc4e80f96
+timeCreated: 1497494493
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: body
+    100002: body 1
+    100004: Code
+    100006: Converter
+    100008: Core
+    100010: EMCity_Unite06:joint11
+    100012: EMCity_Unite06:joint12
+    100014: EMCity_Unite06:joint13
+    100016: EMCity_Unite06:joint14
+    100018: EMCity_Unite06:joint15
+    100020: EMCity_Unite06:joint15 1
+    100022: EMCity_Unite06:joint3
+    100024: EMCity_Unite06:joint4
+    100026: EMCity_Unite06:joint5
+    100028: EMCity_Unite06:joint5 1
+    100030: EMCity_Unite06:joint59
+    100032: EMCity_Unite06:joint6
+    100034: EMCity_Unite06:joint60
+    100036: EMCity_Unite06:joint8
+    100038: EMCity_Unite06:joint8 1
+    100040: EMCity_Unite06:joint9
+    100042: EMCity_Unite06:joint9 1
+    100044: joint10
+    100046: joint2
+    100048: joint58
+    100050: joint6
+    100052: joint7
+    100054: L_Prug
+    100056: Left_BackReg
+    100058: Left_bol
+    100060: Left_Ear
+    100062: Left_FowerdReg
+    100064: Prug
+    100066: R_Prug
+    100068: Right_BackReg
+    100070: Right_bolt
+    100072: Right_Ear
+    100074: Right_Fowerdreg
+    100076: Root
+    100078: tail
+    100080: Unite02
+    100082: //RootNode
+    400000: body
+    400002: body 1
+    400004: Code
+    400006: Converter
+    400008: Core
+    400010: EMCity_Unite06:joint11
+    400012: EMCity_Unite06:joint12
+    400014: EMCity_Unite06:joint13
+    400016: EMCity_Unite06:joint14
+    400018: EMCity_Unite06:joint15
+    400020: EMCity_Unite06:joint15 1
+    400022: EMCity_Unite06:joint3
+    400024: EMCity_Unite06:joint4
+    400026: EMCity_Unite06:joint5
+    400028: EMCity_Unite06:joint5 1
+    400030: EMCity_Unite06:joint59
+    400032: EMCity_Unite06:joint6
+    400034: EMCity_Unite06:joint60
+    400036: EMCity_Unite06:joint8
+    400038: EMCity_Unite06:joint8 1
+    400040: EMCity_Unite06:joint9
+    400042: EMCity_Unite06:joint9 1
+    400044: joint10
+    400046: joint2
+    400048: joint58
+    400050: joint6
+    400052: joint7
+    400054: L_Prug
+    400056: Left_BackReg
+    400058: Left_bol
+    400060: Left_Ear
+    400062: Left_FowerdReg
+    400064: Prug
+    400066: R_Prug
+    400068: Right_BackReg
+    400070: Right_bolt
+    400072: Right_Ear
+    400074: Right_Fowerdreg
+    400076: Root
+    400078: tail
+    400080: Unite02
+    400082: //RootNode
+    2300000: body 1
+    2300002: Code
+    2300004: Converter
+    2300006: Core
+    2300008: L_Prug
+    2300010: Left_BackReg
+    2300012: Left_bol
+    2300014: Left_Ear
+    2300016: Left_FowerdReg
+    2300018: R_Prug
+    2300020: Right_BackReg
+    2300022: Right_bolt
+    2300024: Right_Ear
+    2300026: Right_Fowerdreg
+    3300000: body 1
+    3300002: Code
+    3300004: Converter
+    3300006: Core
+    3300008: L_Prug
+    3300010: Left_BackReg
+    3300012: Left_bol
+    3300014: Left_Ear
+    3300016: Left_FowerdReg
+    3300018: R_Prug
+    3300020: Right_BackReg
+    3300022: Right_bolt
+    3300024: Right_Ear
+    3300026: Right_Fowerdreg
+    4300000: Left_FowerdReg
+    4300002: Left_BackReg
+    4300004: Right_BackReg
+    4300006: Right_Fowerdreg
+    4300008: Code
+    4300010: Core
+    4300012: Converter
+    4300014: R_Prug
+    4300016: L_Prug
+    4300018: body
+    4300020: Left_bol
+    4300022: Right_bolt
+    4300024: Left_Ear
+    4300026: Right_Ear
+    7400000: Unite02_waite
+    7400002: Unite02_Attack
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Unite02_waite
+      takeName: Unite02_Animation_bake
+      firstFrame: 1
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/joint2
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint4
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint4/EMCity_Unite06:joint5
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint4/EMCity_Unite06:joint5/joint6
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint13
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint13/EMCity_Unite06:joint14
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint13/EMCity_Unite06:joint14/EMCity_Unite06:joint15
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint13/EMCity_Unite06:joint60
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint13/EMCity_Unite06:joint60/EMCity_Unite06:joint15
+          1
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint59
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint59/EMCity_Unite06:joint5
+          1
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint59/EMCity_Unite06:joint5
+          1/EMCity_Unite06:joint6
+        weight: 1
+      - path: Root/joint7
+        weight: 1
+      - path: Root/joint7/EMCity_Unite06:joint8 1
+        weight: 1
+      - path: Root/joint7/EMCity_Unite06:joint8 1/EMCity_Unite06:joint9 1
+        weight: 1
+      - path: Root/joint10
+        weight: 1
+      - path: Root/joint10/EMCity_Unite06:joint11
+        weight: 1
+      - path: Root/joint10/EMCity_Unite06:joint11/EMCity_Unite06:joint12
+        weight: 1
+      - path: Root/joint58
+        weight: 1
+      - path: Root/joint58/EMCity_Unite06:joint8
+        weight: 1
+      - path: Root/joint58/EMCity_Unite06:joint8/EMCity_Unite06:joint9
+        weight: 1
+      - path: Unite02
+        weight: 1
+      - path: Unite02/body
+        weight: 1
+      - path: Unite02/body/body 1
+        weight: 1
+      - path: Unite02/body/Left_bol
+        weight: 1
+      - path: Unite02/body/Left_Ear
+        weight: 1
+      - path: Unite02/body/Prug
+        weight: 1
+      - path: Unite02/body/Prug/Converter
+        weight: 1
+      - path: Unite02/body/Prug/L_Prug
+        weight: 1
+      - path: Unite02/body/Prug/R_Prug
+        weight: 1
+      - path: Unite02/body/Right_bolt
+        weight: 1
+      - path: Unite02/body/Right_Ear
+        weight: 1
+      - path: Unite02/Left_BackReg
+        weight: 1
+      - path: Unite02/Left_FowerdReg
+        weight: 1
+      - path: Unite02/Right_BackReg
+        weight: 1
+      - path: Unite02/Right_Fowerdreg
+        weight: 1
+      - path: Unite02/tail
+        weight: 1
+      - path: Unite02/tail/Code
+        weight: 1
+      - path: Unite02/tail/Core
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Unite02_Attack
+      takeName: Unite02_Animation_bake
+      firstFrame: 30
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/joint2
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint4
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint4/EMCity_Unite06:joint5
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint4/EMCity_Unite06:joint5/joint6
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint13
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint13/EMCity_Unite06:joint14
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint13/EMCity_Unite06:joint14/EMCity_Unite06:joint15
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint13/EMCity_Unite06:joint60
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint13/EMCity_Unite06:joint60/EMCity_Unite06:joint15
+          1
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint59
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint59/EMCity_Unite06:joint5
+          1
+        weight: 1
+      - path: Root/joint2/EMCity_Unite06:joint3/EMCity_Unite06:joint59/EMCity_Unite06:joint5
+          1/EMCity_Unite06:joint6
+        weight: 1
+      - path: Root/joint7
+        weight: 1
+      - path: Root/joint7/EMCity_Unite06:joint8 1
+        weight: 1
+      - path: Root/joint7/EMCity_Unite06:joint8 1/EMCity_Unite06:joint9 1
+        weight: 1
+      - path: Root/joint10
+        weight: 1
+      - path: Root/joint10/EMCity_Unite06:joint11
+        weight: 1
+      - path: Root/joint10/EMCity_Unite06:joint11/EMCity_Unite06:joint12
+        weight: 1
+      - path: Root/joint58
+        weight: 1
+      - path: Root/joint58/EMCity_Unite06:joint8
+        weight: 1
+      - path: Root/joint58/EMCity_Unite06:joint8/EMCity_Unite06:joint9
+        weight: 1
+      - path: Unite02
+        weight: 1
+      - path: Unite02/body
+        weight: 1
+      - path: Unite02/body/body 1
+        weight: 1
+      - path: Unite02/body/Left_bol
+        weight: 1
+      - path: Unite02/body/Left_Ear
+        weight: 1
+      - path: Unite02/body/Prug
+        weight: 1
+      - path: Unite02/body/Prug/Converter
+        weight: 1
+      - path: Unite02/body/Prug/L_Prug
+        weight: 1
+      - path: Unite02/body/Prug/R_Prug
+        weight: 1
+      - path: Unite02/body/Right_bolt
+        weight: 1
+      - path: Unite02/body/Right_Ear
+        weight: 1
+      - path: Unite02/Left_BackReg
+        weight: 1
+      - path: Unite02/Left_FowerdReg
+        weight: 1
+      - path: Unite02/Right_BackReg
+        weight: 1
+      - path: Unite02/Right_Fowerdreg
+        weight: 1
+      - path: Unite02/tail
+        weight: 1
+      - path: Unite02/tail/Code
+        weight: 1
+      - path: Unite02/tail/Core
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 15
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
