@@ -1,0 +1,277 @@
+fileFormatVersion: 2
+guid: b3c471827ca55b945b9086a481641134
+timeCreated: 1497494501
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Converter
+    100002: Head
+    100004: joint45
+    100006: joint46
+    100008: joint47
+    100010: joint48
+    100012: joint48 1
+    100014: joint49
+    100016: joint50
+    100018: joint53
+    100020: L_bolt
+    100022: L_Prug
+    100024: Prug
+    100026: R_bolt
+    100028: R_Prug
+    100030: root
+    100032: Unite03
+    100034: //RootNode
+    100036: Unite_Under
+    100038: Unite_Upper
+    400000: Converter
+    400002: Head
+    400004: joint45
+    400006: joint46
+    400008: joint47
+    400010: joint48
+    400012: joint48 1
+    400014: joint49
+    400016: joint50
+    400018: joint53
+    400020: L_bolt
+    400022: L_Prug
+    400024: Prug
+    400026: R_bolt
+    400028: R_Prug
+    400030: root
+    400032: Unite03
+    400034: //RootNode
+    400036: Unite_Under
+    400038: Unite_Upper
+    2300000: Converter
+    2300002: L_bolt
+    2300004: L_Prug
+    2300006: R_bolt
+    2300008: R_Prug
+    2300010: Unite_Under
+    2300012: Unite_Upper
+    3300000: Converter
+    3300002: L_bolt
+    3300004: L_Prug
+    3300006: R_bolt
+    3300008: R_Prug
+    3300010: Unite_Under
+    3300012: Unite_Upper
+    4300000: Unite_Under
+    4300002: Converter
+    4300004: R_Prug
+    4300006: L_Prug
+    4300008: Unite_Upper
+    4300010: L_bolt
+    4300012: R_bolt
+    7400000: Unite3_Waite
+    7400002: Unite3_Attack
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Unite3_Waite
+      takeName: Unite3_Animation
+      firstFrame: 1
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: root
+        weight: 1
+      - path: root/joint45
+        weight: 1
+      - path: root/joint45/joint46
+        weight: 1
+      - path: root/joint45/joint46/joint47
+        weight: 1
+      - path: root/joint45/joint46/joint47/joint48
+        weight: 1
+      - path: root/joint45/joint46/joint53
+        weight: 1
+      - path: root/joint45/joint46/joint53/joint48 1
+        weight: 1
+      - path: root/joint49
+        weight: 1
+      - path: root/joint49/joint50
+        weight: 1
+      - path: Unite03
+        weight: 1
+      - path: Unite03/Head
+        weight: 1
+      - path: Unite03/Head/L_bolt
+        weight: 1
+      - path: Unite03/Head/R_bolt
+        weight: 1
+      - path: Unite03/Head/Unite_Upper
+        weight: 1
+      - path: Unite03/Prug
+        weight: 1
+      - path: Unite03/Prug/Converter
+        weight: 1
+      - path: Unite03/Prug/L_Prug
+        weight: 1
+      - path: Unite03/Prug/R_Prug
+        weight: 1
+      - path: Unite03/Unite_Under
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Unite3_Attack
+      takeName: Unite3_Animation
+      firstFrame: 20
+      lastFrame: 50
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: root
+        weight: 1
+      - path: root/joint45
+        weight: 1
+      - path: root/joint45/joint46
+        weight: 1
+      - path: root/joint45/joint46/joint47
+        weight: 1
+      - path: root/joint45/joint46/joint47/joint48
+        weight: 1
+      - path: root/joint45/joint46/joint53
+        weight: 1
+      - path: root/joint45/joint46/joint53/joint48 1
+        weight: 1
+      - path: root/joint49
+        weight: 1
+      - path: root/joint49/joint50
+        weight: 1
+      - path: Unite03
+        weight: 1
+      - path: Unite03/Head
+        weight: 1
+      - path: Unite03/Head/L_bolt
+        weight: 1
+      - path: Unite03/Head/R_bolt
+        weight: 1
+      - path: Unite03/Head/Unite_Upper
+        weight: 1
+      - path: Unite03/Prug
+        weight: 1
+      - path: Unite03/Prug/Converter
+        weight: 1
+      - path: Unite03/Prug/L_Prug
+        weight: 1
+      - path: Unite03/Prug/R_Prug
+        weight: 1
+      - path: Unite03/Unite_Under
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 15
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

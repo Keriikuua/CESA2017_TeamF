@@ -1,0 +1,205 @@
+fileFormatVersion: 2
+guid: c147ef90fd210dc45b02b3d283901a4b
+timeCreated: 1497250437
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: body
+    100002: EMCity_Unite06:bolt20
+    100004: EMCity_Unite06:bolt21
+    100006: EMCity_Unite06:Converter
+    100008: EMCity_Unite06:joint1
+    100010: EMCity_Unite06:joint10
+    100012: EMCity_Unite06:joint11
+    100014: EMCity_Unite06:joint12
+    100016: EMCity_Unite06:joint13
+    100018: EMCity_Unite06:joint14
+    100020: EMCity_Unite06:joint15
+    100022: EMCity_Unite06:joint15 1
+    100024: EMCity_Unite06:joint2
+    100026: EMCity_Unite06:joint3
+    100028: EMCity_Unite06:joint4
+    100030: EMCity_Unite06:joint5
+    100032: EMCity_Unite06:joint5 1
+    100034: EMCity_Unite06:joint58
+    100036: EMCity_Unite06:joint59
+    100038: EMCity_Unite06:joint6
+    100040: EMCity_Unite06:joint6 1
+    100042: EMCity_Unite06:joint60
+    100044: EMCity_Unite06:joint7
+    100046: EMCity_Unite06:joint8
+    100048: EMCity_Unite06:joint8 1
+    100050: EMCity_Unite06:joint9
+    100052: EMCity_Unite06:joint9 1
+    100054: EMCity_Unite06:pCube18
+    100056: EMCity_Unite06:pCube24
+    100058: EMCity_Unite06:pHelix3
+    100060: EMCity_Unite06:pPyramid11
+    100062: EMCity_Unite06:pPyramid12
+    100064: EMCity_Unite06:pPyramid4
+    100066: EMCity_Unite06:pPyramid5
+    100068: EMCity_Unite06:pPyramid6
+    100070: EMCity_Unite06:pPyramid7
+    100072: EMCity_Unite06:Prug1
+    100074: EMCity_Unite06:R_Prug1
+    100076: EMCity_Unite06:R_Prug2
+    100078: EMCity_Unite06:Unite02
+    100080: tail
+    100082: //RootNode
+    400000: body
+    400002: EMCity_Unite06:bolt20
+    400004: EMCity_Unite06:bolt21
+    400006: EMCity_Unite06:Converter
+    400008: EMCity_Unite06:joint1
+    400010: EMCity_Unite06:joint10
+    400012: EMCity_Unite06:joint11
+    400014: EMCity_Unite06:joint12
+    400016: EMCity_Unite06:joint13
+    400018: EMCity_Unite06:joint14
+    400020: EMCity_Unite06:joint15
+    400022: EMCity_Unite06:joint15 1
+    400024: EMCity_Unite06:joint2
+    400026: EMCity_Unite06:joint3
+    400028: EMCity_Unite06:joint4
+    400030: EMCity_Unite06:joint5
+    400032: EMCity_Unite06:joint5 1
+    400034: EMCity_Unite06:joint58
+    400036: EMCity_Unite06:joint59
+    400038: EMCity_Unite06:joint6
+    400040: EMCity_Unite06:joint6 1
+    400042: EMCity_Unite06:joint60
+    400044: EMCity_Unite06:joint7
+    400046: EMCity_Unite06:joint8
+    400048: EMCity_Unite06:joint8 1
+    400050: EMCity_Unite06:joint9
+    400052: EMCity_Unite06:joint9 1
+    400054: EMCity_Unite06:pCube18
+    400056: EMCity_Unite06:pCube24
+    400058: EMCity_Unite06:pHelix3
+    400060: EMCity_Unite06:pPyramid11
+    400062: EMCity_Unite06:pPyramid12
+    400064: EMCity_Unite06:pPyramid4
+    400066: EMCity_Unite06:pPyramid5
+    400068: EMCity_Unite06:pPyramid6
+    400070: EMCity_Unite06:pPyramid7
+    400072: EMCity_Unite06:Prug1
+    400074: EMCity_Unite06:R_Prug1
+    400076: EMCity_Unite06:R_Prug2
+    400078: EMCity_Unite06:Unite02
+    400080: tail
+    400082: //RootNode
+    2300000: EMCity_Unite06:bolt20
+    2300002: EMCity_Unite06:bolt21
+    2300004: EMCity_Unite06:Converter
+    2300006: EMCity_Unite06:pCube18
+    2300008: EMCity_Unite06:pCube24
+    2300010: EMCity_Unite06:pHelix3
+    2300012: EMCity_Unite06:pPyramid11
+    2300014: EMCity_Unite06:pPyramid12
+    2300016: EMCity_Unite06:pPyramid4
+    2300018: EMCity_Unite06:pPyramid5
+    2300020: EMCity_Unite06:pPyramid6
+    2300022: EMCity_Unite06:pPyramid7
+    2300024: EMCity_Unite06:R_Prug1
+    2300026: EMCity_Unite06:R_Prug2
+    3300000: EMCity_Unite06:bolt20
+    3300002: EMCity_Unite06:bolt21
+    3300004: EMCity_Unite06:Converter
+    3300006: EMCity_Unite06:pCube18
+    3300008: EMCity_Unite06:pCube24
+    3300010: EMCity_Unite06:pHelix3
+    3300012: EMCity_Unite06:pPyramid11
+    3300014: EMCity_Unite06:pPyramid12
+    3300016: EMCity_Unite06:pPyramid4
+    3300018: EMCity_Unite06:pPyramid5
+    3300020: EMCity_Unite06:pPyramid6
+    3300022: EMCity_Unite06:pPyramid7
+    3300024: EMCity_Unite06:R_Prug1
+    3300026: EMCity_Unite06:R_Prug2
+    4300000: EMCity_Unite06:pPyramid7
+    4300002: EMCity_Unite06:pPyramid6
+    4300004: EMCity_Unite06:pPyramid5
+    4300006: EMCity_Unite06:pPyramid4
+    4300008: EMCity_Unite06:pHelix3
+    4300010: EMCity_Unite06:pCube24
+    4300012: EMCity_Unite06:Converter
+    4300014: EMCity_Unite06:R_Prug1
+    4300016: EMCity_Unite06:R_Prug2
+    4300018: EMCity_Unite06:pCube18
+    4300020: EMCity_Unite06:bolt20
+    4300022: EMCity_Unite06:bolt21
+    4300024: EMCity_Unite06:pPyramid11
+    4300026: EMCity_Unite06:pPyramid12
+    7400000: EMCity_Unite02_Waite_bake
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 15
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
