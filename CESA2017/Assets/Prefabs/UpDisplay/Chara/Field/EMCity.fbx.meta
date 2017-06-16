@@ -1,0 +1,230 @@
+fileFormatVersion: 2
+guid: 1cee1ec2403ca12468ef256d1c30d8b6
+timeCreated: 1497496454
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Brige1
+    100002: Brige2
+    100004: conbeair
+    100006: conect
+    100008: //RootNode
+    100010: Enemy_Road
+    100012: ErectricTower
+    100014: ErectricTower1
+    100016: ErectricTower10
+    100018: ErectricTower11
+    100020: ErectricTower12
+    100022: ErectricTower13
+    100024: ErectricTower14
+    100026: ErectricTower15
+    100028: ErectricTower2
+    100030: ErectricTower3
+    100032: ErectricTower4
+    100034: ErectricTower5
+    100036: ErectricTower6
+    100038: ErectricTower7
+    100040: ErectricTower8
+    100042: ErectricTower9
+    100044: Main_Street
+    100046: Reen
+    100048: Shatter
+    100050: UniteGate01
+    100052: UniteGate02
+    100054: UniteRogo1
+    100056: Wall1
+    100058: Wall2
+    100060: Wall_Middle
+    400000: Brige1
+    400002: Brige2
+    400004: conbeair
+    400006: conect
+    400008: //RootNode
+    400010: Enemy_Road
+    400012: ErectricTower
+    400014: ErectricTower1
+    400016: ErectricTower10
+    400018: ErectricTower11
+    400020: ErectricTower12
+    400022: ErectricTower13
+    400024: ErectricTower14
+    400026: ErectricTower15
+    400028: ErectricTower2
+    400030: ErectricTower3
+    400032: ErectricTower4
+    400034: ErectricTower5
+    400036: ErectricTower6
+    400038: ErectricTower7
+    400040: ErectricTower8
+    400042: ErectricTower9
+    400044: Main_Street
+    400046: Reen
+    400048: Shatter
+    400050: UniteGate01
+    400052: UniteGate02
+    400054: UniteRogo1
+    400056: Wall1
+    400058: Wall2
+    400060: Wall_Middle
+    2300000: Brige1
+    2300002: Brige2
+    2300004: conbeair
+    2300006: conect
+    2300008: Enemy_Road
+    2300010: ErectricTower
+    2300012: ErectricTower1
+    2300014: ErectricTower10
+    2300016: ErectricTower11
+    2300018: ErectricTower12
+    2300020: ErectricTower13
+    2300022: ErectricTower14
+    2300024: ErectricTower15
+    2300026: ErectricTower2
+    2300028: ErectricTower3
+    2300030: ErectricTower4
+    2300032: ErectricTower5
+    2300034: ErectricTower6
+    2300036: ErectricTower7
+    2300038: ErectricTower8
+    2300040: ErectricTower9
+    2300042: Main_Street
+    2300044: Reen
+    2300046: Shatter
+    2300048: UniteGate01
+    2300050: UniteGate02
+    2300052: UniteRogo1
+    2300054: Wall1
+    2300056: Wall2
+    2300058: Wall_Middle
+    3300000: Brige1
+    3300002: Brige2
+    3300004: conbeair
+    3300006: conect
+    3300008: Enemy_Road
+    3300010: ErectricTower
+    3300012: ErectricTower1
+    3300014: ErectricTower10
+    3300016: ErectricTower11
+    3300018: ErectricTower12
+    3300020: ErectricTower13
+    3300022: ErectricTower14
+    3300024: ErectricTower15
+    3300026: ErectricTower2
+    3300028: ErectricTower3
+    3300030: ErectricTower4
+    3300032: ErectricTower5
+    3300034: ErectricTower6
+    3300036: ErectricTower7
+    3300038: ErectricTower8
+    3300040: ErectricTower9
+    3300042: Main_Street
+    3300044: Reen
+    3300046: Shatter
+    3300048: UniteGate01
+    3300050: UniteGate02
+    3300052: UniteRogo1
+    3300054: Wall1
+    3300056: Wall2
+    3300058: Wall_Middle
+    4300000: Wall_Middle
+    4300002: UniteGate02
+    4300004: UniteGate01
+    4300006: Wall1
+    4300008: Wall2
+    4300010: Enemy_Road
+    4300012: Shatter
+    4300014: ErectricTower
+    4300016: Brige1
+    4300018: Brige2
+    4300020: conbeair
+    4300022: UniteRogo1
+    4300024: Reen
+    4300026: conect
+    4300028: Main_Street
+    4300030: ErectricTower1
+    4300032: ErectricTower2
+    4300034: ErectricTower3
+    4300036: ErectricTower4
+    4300038: ErectricTower5
+    4300040: ErectricTower6
+    4300042: ErectricTower7
+    4300044: ErectricTower8
+    4300046: ErectricTower9
+    4300048: ErectricTower10
+    4300050: ErectricTower11
+    4300052: ErectricTower12
+    4300054: ErectricTower13
+    4300056: ErectricTower14
+    4300058: ErectricTower15
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 15
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

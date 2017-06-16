@@ -14,21 +14,38 @@ public class TurnSystem : MonoBehaviour
         nInterposePhase,    //挟む
         nBattlePhase        //バトル
     }
+    [Header("enumのターン系")]
     public TurnState turnstate;
 
+    [SerializeField]
+    [Header("タッチした時のレイ飛ばすためのカメラ格納")]
     public GameObject CameraObj;
 
 
     //移動可能オブジェ格納用リスト
-    public List<GameObject> PlayerMoveOkList = new List<GameObject>();              //プレイヤーの移動可能オブジェ
-    private List<GameObject> EnemyMoveOkList = new List<GameObject>();              //敵の移動可能オブジェ
-    public List<GameObject> MoveOkProvisional = new List<GameObject>();                    //左右で移動待ちのオブジェ
-    public List<GameObject> MoveInitWaitObj = new List<GameObject>();                      //初期地点で沸くの待ちオブジェ
-    public int nPlayerOkCount;
-    int nEnemyOkCount;
-    int nPlayerCount = 0;                                                           //MoveDecisionで使う
+    [SerializeField]
+    [Header("敵の移動可能オブジェ")]
+    List<GameObject> EnemyMoveOkList = new List<GameObject>();              //敵の移動可能オブジェ
 
-    //ステージデータ格納
+
+    [SerializeField]
+    [Header("プレイヤーの移動可能オブジェ")]
+    List<GameObject> PlayerMoveOkList = new List<GameObject>();              //プレイヤーの移動可能オブジェ
+    //[SerializeField]
+    //[Header("レーン移動しているプレイヤーオブジェ")]
+    //List<GameObject> PlayerMoveList = new List<GameObject>();               //レーン移動しているプレイヤーオブジェ
+
+    [SerializeField]
+    [Header("左右の移動待ちオブジェ")]
+    List<GameObject> MoveOkProvisional = new List<GameObject>();            //左右で移動待ちのオブジェ
+    [SerializeField]
+    [Header("スタックされてるオブジェ")]
+    List<GameObject> PlayerStuckList = new List<GameObject>();              //スタックされてるオブジェクト
+    [SerializeField]
+    [Header("左右のレーンに移動しているオブジェクト")]
+    List<GameObject> LeftAndRightMoveObj = new List<GameObject>();          //左右レーンに移動しているオブジェクト格納用
+
+    //Enemy生成データ格納
     StageForm stageform;
     List<string[]> StageEnemyData = new List<string[]>();
     int nEvacuate = 0;
@@ -37,34 +54,36 @@ public class TurnSystem : MonoBehaviour
     bool bRandomFormFlg;
 
     int nTurn;              //現在のターン数
+    int nEnemyCount;        //倒した敵の数
 
     Character character;
-    CharaList charalist;        //生成されてるキャラの参照のため
+    FieldManager fildmane;
+    DebugButton DButton;
+    UITest uitest;
 
-    public GameObject[] InterposeObj = new GameObject[2];      //挟めるオブジェクト格納用
+   
+    Vector3[] PlayerRighitLeftPosition = new Vector3[2];                //左右の自キャラが待機する座標
+    Vector3 PlayerWaitePosition;                                        //左右移動前の待機場所
+
     [SerializeField]
+    [Header("挟めるオブジェクト格納用")]
+    GameObject[] InterposeObj = new GameObject[2];      //挟めるオブジェクト格納用
+    [SerializeField]
+    [Header("↓一つ目の指がタッチしたオブジェクト")]
     List<GameObject> FarstTuchObj = new List<GameObject>();
     [SerializeField]
+    [Header("↓二つ目の指がタッチしたオブジェクト")]
     List<GameObject> SecondTuchObj = new List<GameObject>();
-    [SerializeField]
     List<GameObject> ThreeTuchObj = new List<GameObject>();
-    //タップされたスタート地点の座標
-    Vector3 TouchStartPosLeft;
-    Vector3 TouchStartPosRight;
     //フリックの終了地点
     Vector3 TouchEndPosLeft;
     Vector3 TouchEndPosRight;
-    //フリックされたオブジェクトの移動地点
-    Vector3 GoalPos_Left;
-    Vector3 GoalPos_Right;
     //フリックが正しい判定用
     int nCorrect;
     //等速移動用変数
-    float startTime = 0.0f;
     float nowTime = 0.0f;
     float endTime = 2.0f;
     //等速移動用のスタート地点
-    Vector3 StartPos_Left;
     Vector3 StartPos_Right;
 
     bool bDestoryFlg = false;
@@ -73,7 +92,9 @@ public class TurnSystem : MonoBehaviour
     //自動ターン用変数
     float TurnTime;             //現在のターンに入ってからの時間
     bool MoveFlg = false;       //一回移動用
-    bool MoveCheak = false;     //InitMoveチェック
+    //スタック
+    bool StuckFlg = false;
+    bool UITimeFlg = false;
 
 
     private void Awake()
@@ -87,8 +108,6 @@ public class TurnSystem : MonoBehaviour
     void Start()
     {
         turnstate = TurnState.nNone;
-        nPlayerOkCount = 0;
-        nEnemyOkCount = 0;
         bFormEnd = false;
         bHasamuFlg = false;
         bRandomFormFlg = false;
@@ -97,12 +116,16 @@ public class TurnSystem : MonoBehaviour
         TurnTime = 0;
 
         character = GameObject.Find("Chara").GetComponent<Character>();
-        charalist = GameObject.Find("Chara").GetComponent<CharaList>();
+        fildmane = GameObject.Find("MapData").GetComponent<FieldManager>();
+        DButton = GameObject.Find("Button").GetComponent<DebugButton>();
+        uitest = GameObject.Find("UI").GetComponent<UITest>();
         stageform = GetComponent<StageForm>();
         StageEnemyData = stageform.StageData_Enemy();
 
 
-
+        PlayerRighitLeftPosition[0] = fildmane.SetMyRightCharaPos();
+        PlayerRighitLeftPosition[1] = fildmane.SetMyLeftCharaPos();
+        PlayerWaitePosition = fildmane.SetMyWaiteCharaPos();
     }
 
 
@@ -148,19 +171,29 @@ public class TurnSystem : MonoBehaviour
             }
         }
 
-
-
+        PlayerMovePhaseCheck();
+        PlayerLeftRightMove();
+       
         //ターン処理
         switch (turnstate)
         {
             //
             case TurnState.nNone:
                 TurnTime += Time.deltaTime;
+
+                if (!StuckFlg)
+                {
+                    StuckFlg = true;
+                    EnemyStuck();
+                }
+
                 if (TurnTime >= 2)
                 {
                     turnstate++;
                     TurnTime = 0;
+                    StuckFlg = false;
                 }
+
 
 
                 break;
@@ -183,6 +216,7 @@ public class TurnSystem : MonoBehaviour
                         if (n == 1 || n == 2)
                         {
                             EnemyMoveOkList.Add(character.EnemyForm(0));
+                            
                             bFormEnd = true;
                             
                         }
@@ -195,34 +229,37 @@ public class TurnSystem : MonoBehaviour
                     if (nEvacuate == 0 && !bFormEnd)
                     {
                         EnemyMoveOkList.Add(character.EnemyForm(0));
+                        uitest.EnemySortie();
                         bFormEnd = true;
                     }
                 }
-                    break;
+                
+                break;
             //移動フェーズ
             case TurnState.nMovePhase:
-                MovePhase();
+                if (!MoveFlg)
+                {
+                    PlayerMoveOk();
+                    MovePhase();
+                }
                 TurnTime += Time.deltaTime;
+                if (!UITimeFlg)
+                {
+                    uitest.TurnTime(5);
+                    UITimeFlg = true;
+                }
+
                 if (TurnTime >= 5)
                 {
                     turnstate++;
+                    MoveFlg = false;
                     TurnTime = 0;
+                    UITimeFlg = false;
                 }
                 break;
             //挟むフェーズ
             case TurnState.nInterposePhase:
                 InterposePhase();
-                if (!MoveCheak)
-                {
-                    if (MoveInitWaitObj.Count >= 2 && MoveOkProvisional.Count == 0)
-                    {
-                        MoveInitWaitObj[0].GetComponent<PlayerScr>().WaitClear();
-                        MoveInitWaitObj[1].GetComponent<PlayerScr>().WaitClear();
-                        MoveInitWaitObj.RemoveAt(0);
-                        MoveInitWaitObj.RemoveAt(0);
-                    }
-                    MoveCheak = true;
-                }
                 TurnTime += Time.deltaTime;
 
                 if (TurnTime >= 5)
@@ -239,6 +276,7 @@ public class TurnSystem : MonoBehaviour
                 {
                     turnstate = TurnState.nEnemyForm;
                     nTurn++;
+                    DButton.TurnNum(nTurn);
                     bFormEnd = false;
                     TurnTime = 0;
                 }
@@ -263,38 +301,6 @@ public class TurnSystem : MonoBehaviour
     //移動フェーズ
     void MovePhase()
     {
-        bRandomFormFlg = false;
-        if (!MoveFlg)
-        {
-            Debug.Log("ifのました");
-            if (MoveInitWaitObj.Count > 0 && MoveInitWaitObj.Count < 2)
-            {
-                MoveInitWaitObj[0].GetComponent<PlayerScr>().WaitClear();
-                MoveInitWaitObj.RemoveAt(0);
-            }
-
-            if (nPlayerOkCount >= 2)
-            {
-                Debug.Log("OK");
-                PlayerMoveOkList.Add(MoveOkProvisional[0]);
-                PlayerMoveOkList.Add(MoveOkProvisional[1]);
-                MoveOkProvisional.RemoveAt(0);
-                MoveOkProvisional.RemoveAt(0);
-                nPlayerCount = 0;
-                nPlayerOkCount = 0;
-            }
-
-            if (nPlayerOkCount == 0)
-            {
-                if (MoveInitWaitObj.Count >= 2)
-                {
-                    MoveInitWaitObj[0].GetComponent<PlayerScr>().WaitClear();
-                    MoveInitWaitObj[1].GetComponent<PlayerScr>().WaitClear();
-                    MoveInitWaitObj.RemoveAt(0);
-                    MoveInitWaitObj.RemoveAt(0);
-                }
-            }
-
             //プレイヤーの移動
             for (int i = 0; i < PlayerMoveOkList.Count; i++)
             {
@@ -303,7 +309,7 @@ public class TurnSystem : MonoBehaviour
                     PlayerMoveOkList.RemoveAt(i);
                     continue;
                 }
-                PlayerMoveOkList[i].GetComponent<PlayerScr>().PosZ(new Vector3(PlayerMoveOkList[i].transform.position.x - 1.5f, PlayerMoveOkList[i].transform.position.y, PlayerMoveOkList[i].transform.position.z), 1);
+                PlayerMoveOkList[i].GetComponent<PlayerScr>().MovePhasePlus(new Vector3(PlayerMoveOkList[i].transform.position.x - 1.5f, PlayerMoveOkList[i].transform.position.y, PlayerMoveOkList[i].transform.position.z), 2);
             }
             //敵キャラの移動
             for (int i = 0; i < EnemyMoveOkList.Count; i++)
@@ -317,17 +323,13 @@ public class TurnSystem : MonoBehaviour
                 //EnemyMoveOkList[i].transform.position += new Vector3(1.5f, 0, 0);
             }
             MoveFlg = true;
-            MoveCheak = false;
-        }
 
     }
-
-    //挟むフェーズ
+ 
     void InterposePhase()
     {
         //画面を押してオブジェクトに触れている指の数
         int nTouchObjNum = 0;
-        GameObject[] ObjArray = new GameObject[10];          //当たってるオブジェクト格納用
         MoveFlg = false;
         if (!HasamuMoveFlg)
         {
@@ -433,17 +435,12 @@ public class TurnSystem : MonoBehaviour
                             InterposeObj[0] = FarstTuchObj[i].transform.gameObject;
                             InterposeObj[1] = SecondTuchObj[v].transform.gameObject;
 
-                            TouchStartPosLeft = InterposeObj[0].transform.position;
-                            TouchStartPosRight = InterposeObj[1].transform.position;
-
                         }
                         else 
                         {
                             InterposeObj[1] = FarstTuchObj[i].transform.gameObject;
                             InterposeObj[0] = SecondTuchObj[v].transform.gameObject;
 
-                            TouchStartPosLeft = InterposeObj[0].transform.position;
-                            TouchStartPosRight = InterposeObj[1].transform.position;
                         }
 
                         InterposeObj[0].GetComponent<Renderer>().material.color = Color.red;
@@ -465,17 +462,12 @@ public class TurnSystem : MonoBehaviour
                             InterposeObj[0] = FarstTuchObj[i].transform.gameObject;
                             InterposeObj[1] = SecondTuchObj[v].transform.gameObject;
 
-                            TouchStartPosLeft = InterposeObj[0].transform.position;
-                            TouchStartPosRight = InterposeObj[1].transform.position;
-
                         }
                         else
                         {
                             InterposeObj[1] = FarstTuchObj[i].transform.gameObject;
                             InterposeObj[0] = SecondTuchObj[v].transform.gameObject;
 
-                            TouchStartPosLeft = InterposeObj[0].transform.position;
-                            TouchStartPosRight = InterposeObj[1].transform.position;
                         }
 
                         InterposeObj[0].GetComponent<Renderer>().material.color = Color.red;
@@ -497,16 +489,10 @@ public class TurnSystem : MonoBehaviour
                         //フリック終わりのポジションを格納
                         if (Input.touches[i].position.x > 200)
                         {
-                            Vector2 pos = Camera.main.ScreenToWorldPoint(Input.touches[i].position);
-                            GoalPos_Left = new Vector3(TouchStartPosLeft.z, pos.y, pos.x);
-                            StartPos_Left = InterposeObj[0].transform.position;
                             nCorrect++;
                         }
                         if (Input.touches[i].position.x < 200)
                         {
-                            Vector2 pos = Camera.main.ScreenToWorldPoint(Input.touches[i].position);
-                            GoalPos_Right = new Vector3(TouchStartPosRight.z, pos.y, pos.x);
-                            StartPos_Right = InterposeObj[0].transform.position;
                             nCorrect++;
                         }
                     }
@@ -528,8 +514,8 @@ public class TurnSystem : MonoBehaviour
         {
             if (!bDestoryFlg)
             {
-                InterposeObj[0].GetComponent<PlayerScr>().PosZ(InterposeObj[1].transform.position,0);
-                InterposeObj[1].GetComponent<PlayerScr>().PosZ(InterposeObj[0].transform.position,0);
+                InterposeObj[0].GetComponent<PlayerScr>().MovePhasePlus(InterposeObj[1].transform.position,1);
+                InterposeObj[1].GetComponent<PlayerScr>().MovePhasePlus(InterposeObj[0].transform.position,1);
                 bDestoryFlg = true;
                 HasamuMoveFlg = true;
             }
@@ -585,13 +571,13 @@ public class TurnSystem : MonoBehaviour
         {
             InterposeObj[0] = PlayerMoveOkList[0].gameObject;
             InterposeObj[1] = PlayerMoveOkList[1].gameObject;
-            InterposeObj[0].GetComponent<PlayerScr>().PosZ(InterposeObj[1].transform.position, 0);
-            InterposeObj[1].GetComponent<PlayerScr>().PosZ(InterposeObj[0].transform.position, 0);
+            InterposeObj[0].GetComponent<PlayerScr>().MovePhasePlus(InterposeObj[1].transform.position, 1);
+            InterposeObj[1].GetComponent<PlayerScr>().MovePhasePlus(InterposeObj[0].transform.position, 1);
+            InterposeObj[0].GetComponent<PlayerScr>().AnimaFlgChange();
+            InterposeObj[1].GetComponent<PlayerScr>().AnimaFlgChange();
         }
+    }//挟むフェーズ
 
-
-    }
-    //バトルフェーズ
     public void BattlePhase(GameObject pObj1, GameObject pObj2, GameObject eObj)
     {
         PlayerScr pObj1Scr = pObj1.GetComponent<PlayerScr>();
@@ -610,7 +596,9 @@ public class TurnSystem : MonoBehaviour
                     EnemyMoveOkList.RemoveAt(i);
                 }
             }
+            EnemyDowun();
             Destroy(eObj);
+            
         }
         //PlayerMoveOkListから消すオブジェクトを削除する
         for (int i = 0; i < PlayerMoveOkList.Count; i++)
@@ -631,9 +619,9 @@ public class TurnSystem : MonoBehaviour
             }
         }
 
-    }
+    }//バトルフェーズ
 
-    //タグ生成関数
+
     static void AddTag(string tagname)
     {
         UnityEngine.Object[] asset = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset");
@@ -656,12 +644,95 @@ public class TurnSystem : MonoBehaviour
             so.ApplyModifiedProperties();
             so.Update();
         }
-    }
+    }//タグ生成関数
 
-    //フリックされた方向取得関数
+
+    void EnemyStuck()
+    {
+        for(int i = nTurn; i < nTurn + 3; i++)
+        {
+            nEvacuate = int.Parse(StageEnemyData[i][0]);
+            if (nEvacuate == 0)
+            {
+                uitest.EnemyStuck(nEvacuate);
+            }
+        }
+    }//敵のスタック
+
+    public void PlayerStuckIn(GameObject obj)
+    {
+        PlayerStuckList.Add(obj);
+        
+    }//プレイヤーは生成されたらまずスタックに入る
+
+    void PlayerMovePhaseCheck()
+    {
+        if (PlayerStuckList.Count >= 1)     //プレイヤーがスタックリストの中に一つ以上あるなら
+        {
+            int num = MoveOkProvisional.Count + LeftAndRightMoveObj.Count;
+            if (num < 2)
+            {
+                PlayerStuckList[0].GetComponent<PlayerScr>().MovePhasePlus(PlayerWaitePosition, 2);
+                
+            }
+        }
+    }//プレイヤーをスタックから動かす
+
+    void PlayerLeftRightMove()
+    {
+        if(MoveOkProvisional.Count >= 1)
+        {
+            int num = LeftAndRightMoveObj.Count;
+            switch (num)
+            {
+                case 0:
+                    MoveOkProvisional[0].GetComponent<PlayerScr>().MovePhasePlus(PlayerRighitLeftPosition[0], 2);
+                    break;
+                case 1:
+                    MoveOkProvisional[0].GetComponent<PlayerScr>().MovePhasePlus(PlayerRighitLeftPosition[1], 2);
+                    break;
+            }
+        }
+    }//左右移動待ちから動かす
+
+    void PlayerMoveOk()
+    {
+        if(LeftAndRightMoveObj.Count == 2)
+        {
+            PlayerMoveOkList.Add(LeftAndRightMoveObj[0]);
+            PlayerMoveOkList.Add(LeftAndRightMoveObj[1]);
+            LeftAndRightMoveObj.RemoveAt(0);
+            LeftAndRightMoveObj.RemoveAt(0);
+        }
+    }//左右レーンに移動できている
+
+    public void PlayerListChange(GameObject obj)
+    {
+        for (int i = 0;i < PlayerStuckList.Count; i++)
+        {
+            if(PlayerStuckList[i].gameObject == obj)
+            {
+                MoveOkProvisional.Add(PlayerStuckList[i]);
+                PlayerStuckList.RemoveAt(i);
+                return;
+            }
+        }
+
+        for (int i = 0; i < MoveOkProvisional.Count; i++)
+        {
+            if (MoveOkProvisional[i].gameObject == obj)
+            {
+                LeftAndRightMoveObj.Add(MoveOkProvisional[i]);
+                MoveOkProvisional.RemoveAt(i);
+                return;
+            }
+        }
+
+    }
+    
     void GetDirection()
     {
-    }
+    }//フリックされた方向取得関数(未実装)
 
     public void TrunSkip()
     {
@@ -672,58 +743,42 @@ public class TurnSystem : MonoBehaviour
             nTurn++;
             bFormEnd = false;
         }
-    }
-
-    public void PlayerMoveOk(GameObject obj)
-    {
-        MoveOkProvisional.Add(obj);
-        nPlayerOkCount++;
-        //PlayerMoveOkList.Add(obj);
-    }
-
-    public bool MoveDecision(GameObject obj)
-    {
-        //if (turnstate != TurnState.nMovePhase)
-        //{
-            if (MoveOkProvisional.Count >= 2)
-            {
-                MoveInitWaitObj.Add(obj);
-                return false;
-            }
-            else if (nPlayerCount < 2)
-            {
-                nPlayerCount++;
-                return true;
-            }
-        //}
-
-        MoveInitWaitObj.Add(obj);
-        return false;
-
-    }
+    }//1フェーズ進める
 
     public TurnState SetTurnState()
     {
         return turnstate;
-    }
-
+    }//今どのフェーズなのか把握用
+  
     public void DeleteStuck()
     {
-        if(MoveInitWaitObj.Count >= 1)
+        if(PlayerStuckList.Count >= 1)
         {
-            for (int i = 0;i < MoveInitWaitObj.Count;i++)
+            for (int i = 0;i < PlayerStuckList.Count;i++)
             {
-                Destroy(MoveInitWaitObj[i].gameObject);
+                Destroy(PlayerStuckList[i].gameObject);
             }
 
-            while (MoveInitWaitObj.Count != 0)
+            while (PlayerStuckList.Count != 0)
             {
-                MoveInitWaitObj.RemoveAt(0);
+                PlayerStuckList.RemoveAt(0);
             }
         }
+    }//スタックされてるオブジェクトの全削除
 
+    public void EnemyDowun()
+    {
+        nEnemyCount++;
 
+        if(nEnemyCount >= 2)
+        {
+            GameObject.Find("Button").GetComponent<DebugButton>().Win();
+        }
+    }
 
+    public void SutuckUIDelete()
+    {
+        uitest.PlayerSortie();
     }
 
 }

@@ -36,8 +36,10 @@ public class EnemyScr : MonoBehaviour {
         {
             if (!bEndflg)
             {
-                dButton = GameObject.Find("Button").GetComponent<DebugButton>();
-                dButton.Endurance(0.2f);
+                //dButton = GameObject.Find("Button").GetComponent<DebugButton>();
+                //dButton.Endurance(0.2f);
+                GameObject.Find("UI").GetComponent<UITest>().Life();
+                GameObject.Find("TurnObj").GetComponent<TurnSystem>().EnemyDowun();
                 Destroy(this.gameObject);
                 bEndflg = true;
             }
@@ -52,14 +54,16 @@ public class EnemyScr : MonoBehaviour {
                 fMoveTime += Time.deltaTime;
             }
             else
-            {
+            {              
                 bMoveFlg = false;
             }
         }
 
         if(nHp <= 0)
         {
+            GameObject.Find("TurnObj").GetComponent<TurnSystem>().EnemyDowun();
             Destroy(this.gameObject);
+            
         }
 
     }

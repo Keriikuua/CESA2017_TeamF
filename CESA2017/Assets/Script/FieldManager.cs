@@ -50,19 +50,26 @@ public class FieldManager : MonoBehaviour
         GameObject obj = FieldList[m_nHeight - 1][m_nWidth / 2];
         
         return obj.transform.position;
+    }//自キャラのスタート位置
+
+    public Vector3 SetMyWaiteCharaPos()
+    {
+        GameObject obj = FieldList[m_nHeight - 2][m_nWidth / 2];
+
+        return obj.transform.position;
     }
 
     public Vector3 SetMyRightCharaPos()
     {
-        GameObject obj = FieldList[m_nHeight - 1][m_nWidth - 1];
+        GameObject obj = FieldList[m_nHeight - 2][m_nWidth - 1];
         return obj.transform.position;
-    }
+    }//右側レーンのスタート位置
 
     public Vector3 SetMyLeftCharaPos()
     {
-        GameObject obj = FieldList[m_nHeight - 1][0];
+        GameObject obj = FieldList[m_nHeight - 2][0];
         return obj.transform.position;
-    }
+    }//左側レーンのスタート位置
 
     public Vector3 SetEnemyStartPos()
     {
