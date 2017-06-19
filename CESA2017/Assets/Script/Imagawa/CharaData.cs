@@ -58,11 +58,23 @@ public class CharaData : MonoBehaviour {
 
         charaArray[4].nHP = 10000;
         charaArray[4].nAttack = 20000;
-        charaArray[4].type = Type.Chara.A;
+        charaArray[4].type = Type.Chara.B;
 
         charaArray[5].nHP = 100000;
         charaArray[5].nAttack = 200000;
-        charaArray[5].type = Type.Chara.A;
+        charaArray[5].type = Type.Chara.C;
+
+        charaArray[6].nHP = 1000;
+        charaArray[6].nAttack = 2000;
+        charaArray[6].type = Type.Chara.A;
+
+        charaArray[7].nHP = 10000;
+        charaArray[7].nAttack = 20000;
+        charaArray[7].type = Type.Chara.B;
+
+        charaArray[8].nHP = 100000;
+        charaArray[8].nAttack = 200000;
+        charaArray[8].type = Type.Chara.C;
     }
 
 

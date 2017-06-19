@@ -76,7 +76,6 @@ public class PlayerScr : MonoBehaviour {
                 if(nMoveCount == 1)
                 {
                     turnsystem.SutuckUIDelete();
-                    Debug.Log("koko");
                 }
 
                 if(nMoveCount == 2)

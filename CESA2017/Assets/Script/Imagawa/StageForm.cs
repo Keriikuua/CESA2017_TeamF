@@ -15,7 +15,7 @@ public class StageForm : MonoBehaviour {
 
     private void Awake(){
 
-        FileName = "EnemyForm0";
+        FileName = "EnemyForm2";
         StageNum = "1";
         csvFile = Resources.Load("CSV/" + FileName) as TextAsset;
         StringReader reader = new StringReader(csvFile.text);

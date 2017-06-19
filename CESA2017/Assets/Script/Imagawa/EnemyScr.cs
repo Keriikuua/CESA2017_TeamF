@@ -40,8 +40,9 @@ public class EnemyScr : MonoBehaviour {
                 //dButton.Endurance(0.2f);
                 GameObject.Find("UI").GetComponent<UITest>().Life();
                 GameObject.Find("TurnObj").GetComponent<TurnSystem>().EnemyDowun();
-                Destroy(this.gameObject);
-                bEndflg = true;
+                this.gameObject.GetComponent<Animator>().SetBool("AttackFlg",true);
+                //Destroy(this.gameObject);
+                //bEndflg = true;
             }
         }
 
@@ -81,7 +82,7 @@ public class EnemyScr : MonoBehaviour {
         fMoveTime = 0;
         fEndTime = 2.0f;
         NowPos = transform.position;
-        DirectionPos = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z);
+        DirectionPos = new Vector3(transform.position.x + 2.2f, transform.position.y, transform.position.z);
         bMoveFlg = true;
     }
 
