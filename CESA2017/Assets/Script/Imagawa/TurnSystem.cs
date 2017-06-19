@@ -262,7 +262,7 @@ public class TurnSystem : MonoBehaviour
                 InterposePhase();
                 TurnTime += Time.deltaTime;
 
-                if (TurnTime >= 5)
+                if (TurnTime >= 0.1f)
                 {
                     turnstate = TurnState.nEnemyForm;
                     DButton.TurnNum(nTurn);
@@ -632,15 +632,20 @@ public class TurnSystem : MonoBehaviour
     {
         if (EnemyStuckFlg)
         {
-            nEvacuate = int.Parse(StageEnemyData[nTurn + 3][0]);
-            if (nEvacuate != 0)
+            Debug.Log(StageEnemyData.Count);
+            Debug.Log(nTurn + "ターン");
+            if (StageEnemyData.Count > nTurn + 2)
             {
-                uitest.EnemyStuck(nEvacuate);
+                nEvacuate = int.Parse(StageEnemyData[nTurn + 2][0]);
+                if (nEvacuate != 0)
+                {
+                    uitest.EnemyStuck(nEvacuate);
+                }
             }
         }
         if (!EnemyStuckFlg)
         {
-            for (int i = nTurn; i < nTurn + 3; i++)
+            for (int i = nTurn; i < nTurn + 2; i++)
             {
                 nEvacuate = int.Parse(StageEnemyData[i][0]);
                 if (nEvacuate != 0)

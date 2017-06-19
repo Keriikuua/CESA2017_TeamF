@@ -81,6 +81,7 @@ public class PlayerScr : MonoBehaviour {
                 if(nMoveCount == 2)
                 {
                     RotationRiset();
+                    
                 }
             }
         }
@@ -105,6 +106,7 @@ public class PlayerScr : MonoBehaviour {
             bMoveOn = true;
             bMultiIn = true;
             nMoveCount++;
+            this.gameObject.GetComponent<Animator>().SetBool("WaiteFlg", true);
         }
     }//目的地とそこに移動するまでの時間を格納＆移動開始
 
@@ -115,6 +117,7 @@ public class PlayerScr : MonoBehaviour {
 
     public void AnimaFlgChange()
     {
+        this.gameObject.GetComponent<Animator>().SetBool("WaiteFlg", false);
         this.gameObject.GetComponent<Animator>().SetBool("AttackFlg", true);
     }
 

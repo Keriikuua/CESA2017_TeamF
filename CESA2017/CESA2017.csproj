@@ -78,14 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\AutoMold.cs" />
     <Compile Include="Assets\Script\CRT.cs" />
-    <Compile Include="Assets\Script\Convair.cs" />
-    <Compile Include="Assets\Script\DeleteArea.cs" />
-    <Compile Include="Assets\Script\Elementary.cs" />
-    <Compile Include="Assets\Script\Fever.cs" />
-    <Compile Include="Assets\Script\FieldData.cs" />
-    <Compile Include="Assets\Script\FieldManager.cs" />
     <Compile Include="Assets\Script\Imagawa\CharaData.cs" />
     <Compile Include="Assets\Script\Imagawa\CharaList.cs" />
     <Compile Include="Assets\Script\Imagawa\Character.cs" />
@@ -97,12 +90,22 @@
     <Compile Include="Assets\Script\Imagawa\TurnSystem.cs" />
     <Compile Include="Assets\Script\Imagawa\UITest.cs" />
     <Compile Include="Assets\Script\Imagawa\animeTest.cs" />
-    <Compile Include="Assets\Script\Mold.cs" />
-    <Compile Include="Assets\Script\MoldParticle.cs" />
     <Compile Include="Assets\Script\Particle.cs" />
-    <Compile Include="Assets\Script\TitleElemental.cs" />
-    <Compile Include="Assets\Script\Type.cs" />
-    <Compile Include="Assets\Script\ZoomCamera.cs" />
+    <Compile Include="Assets\Script\Takahashi\AutoMold.cs" />
+    <Compile Include="Assets\Script\Takahashi\Convair.cs" />
+    <Compile Include="Assets\Script\Takahashi\DeleteArea.cs" />
+    <Compile Include="Assets\Script\Takahashi\Elementary.cs" />
+    <Compile Include="Assets\Script\Takahashi\Fever.cs" />
+    <Compile Include="Assets\Script\Takahashi\FieldData.cs" />
+    <Compile Include="Assets\Script\Takahashi\FieldManager.cs" />
+    <Compile Include="Assets\Script\Takahashi\MenuOpen.cs" />
+    <Compile Include="Assets\Script\Takahashi\Mold.cs" />
+    <Compile Include="Assets\Script\Takahashi\MoldParticle.cs" />
+    <Compile Include="Assets\Script\Takahashi\PausableCoroutine.cs" />
+    <Compile Include="Assets\Script\Takahashi\Pause.cs" />
+    <Compile Include="Assets\Script\Takahashi\TitleElemental.cs" />
+    <Compile Include="Assets\Script\Takahashi\Type.cs" />
+    <Compile Include="Assets\Script\Takahashi\ZoomCamera.cs" />
     <Compile Include="Assets\Script\collision.cs" />
     <Compile Include="Assets\Script\fadein.cs" />
     <Compile Include="Assets\Script\fadeout.cs" />
