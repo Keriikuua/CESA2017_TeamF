@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Convair : MonoBehaviour {
+public class Convair : PausableCoroutine {
 
     [SerializeField,Header("素のプレハブ")]
     GameObject prefab;
@@ -23,21 +23,31 @@ public class Convair : MonoBehaviour {
     private List<GameObject> ElementaryList = new List<GameObject>();
     private float CreateSpeed;
 
+    public PausableCoroutine pause;
+
+    bool bSwitch;
+    IEnumerator MethodName;
+
+
     // 
     IEnumerator MainStart()
     {
         while (true)
         {
-            Create();
             yield return new WaitForSeconds(CreateSpeed);
+            Create();
         }
     }
+    
 
     // Use this for initialization
     void Start()
     {
         CreateSpeed = fDefaultCreateSpeed;
-        StartCoroutine("MainStart");
+        Create();
+        bSwitch = true;
+        MethodName = MainStart();
+        StartCoroutine(MethodName);
     }
 	
 	// Update is called once per frame
@@ -68,5 +78,23 @@ public class Convair : MonoBehaviour {
         GameObject Element = Instantiate(prefab, CreatePos, Quaternion.identity);   // 素生成
         Element.transform.parent = transform;
         ElementaryList.Add(Element);    // リストに追加
+    }
+
+    /// <summary>
+    /// 素生成のON/OFF切り替え
+    /// </summary>
+    public void ConvairSwitch()
+    {
+        if (!bSwitch)
+        {
+            MethodName = null;
+            MethodName = MainStart();
+            StartCoroutine(MethodName);
+        }
+        else
+        {
+            StopCoroutine(MethodName);
+        }
+        bSwitch = !bSwitch;
     }
 }

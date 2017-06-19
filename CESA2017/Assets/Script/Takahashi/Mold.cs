@@ -27,10 +27,10 @@ public class Mold : MonoBehaviour {
     [SerializeField,Header("対応キー")]
     string Botton;
 
-    [SerializeField, Header("BAD判定ゾーン"),Range(0.0f,0.25f)]
+    [SerializeField, Header("BAD判定ゾーン"),Range(0.0f,0.5f)]
     float BadZone;
 
-    [SerializeField, Header("GOOD判定ゾーン"), Range(0.0f, 0.25f)]
+    [SerializeField, Header("GOOD判定ゾーン"), Range(0.0f, 0.5f)]
     float GoodZone;
 
     [SerializeField, Header("フィーバーゲージ")]
@@ -170,7 +170,7 @@ public class Mold : MonoBehaviour {
     }
 
     // 型のタイプ取得
-    public Type.Chara GetType()
+    public new Type.Chara GetType()
     {
         return MoldType;
     }
