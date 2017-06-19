@@ -142,7 +142,7 @@ public class Mold : MonoBehaviour {
         // Best判定
         if ((ScaleX - BadZone) - GoodZone > HitZone && (ScaleX - BadZone) - GoodZone - BestZone < HitZone)
         {
-            Debug.Log("best");
+            //Debug.Log("best");
             particle.PlayParticle(nBest);
             FeverPlus(nBest);
             CharaCreate(1);
@@ -152,7 +152,7 @@ public class Mold : MonoBehaviour {
         // Good判定
         if ((ScaleX - BadZone) > HitZone && (ScaleX - BadZone) - GoodZone <HitZone)
         {
-            Debug.Log("good");
+            //Debug.Log("good");
             particle.PlayParticle(nGood);
             FeverPlus(nGood);
             CharaCreate(2);
@@ -162,7 +162,7 @@ public class Mold : MonoBehaviour {
         // Bad判定
         //if (ScaleX > HitZone && (ScaleX - BadZone) < HitZone)
         //{
-        Debug.Log("bad");
+        //Debug.Log("bad");
         particle.PlayParticle(nBad);
         FeverPlus(nBad);
         CharaCreate(3);
