@@ -112,33 +112,45 @@ public class UITest : MonoBehaviour {
     //敵出撃
     public void EnemySortie()
     {
-        if (EnemyStuck2.activeSelf == true)
-        {
-            EnemyStuck1.GetComponent<Image>().sprite = EnemyStuck2.GetComponent<Image>().sprite;
-        }
-        else
-        {
-            EnemyStuck1.SetActive(false);
-        }
-
-        if (EnemyStuck3.activeSelf == true)
-            EnemyStuck2.GetComponent<Image>().sprite = EnemyStuck3.GetComponent<Image>().sprite;
-        else
-            EnemyStuck2.SetActive(false);
-
-        if (EnemyStuck4.activeSelf == true)
-        {
-            EnemyStuck3.GetComponent<Image>().sprite = EnemyStuck4.GetComponent<Image>().sprite;
-            EnemyStuck4.SetActive(false);
-        }
-        else
-            EnemyStuck3.SetActive(false);
-
         nEnemyStuckNum--;
 
+        //nPlayerStuckNum = 0;
         if (nEnemyStuckNum <= 0)
         {
             nEnemyStuckNum = 0;
+        }
+        else if (nEnemyStuckNum >= 3)
+        {
+            nEnemyStuckNum = 3;
+        }
+
+        switch (nEnemyStuckNum)
+        {
+            case 0:
+                //ayerStuck1.GetComponent<Image>().sprite = null;
+                EnemyStuck1.SetActive(false);
+                break;
+
+            case 1:
+                EnemyStuck1.GetComponent<Image>().sprite = EnemyStuck2.GetComponent<Image>().sprite;
+                //layerStuck2.GetComponent<Image>().sprite = null;
+                EnemyStuck2.SetActive(false);
+                break;
+
+            case 2:
+                EnemyStuck1.GetComponent<Image>().sprite = EnemyStuck2.GetComponent<Image>().sprite;
+                EnemyStuck2.GetComponent<Image>().sprite = EnemyStuck3.GetComponent<Image>().sprite;
+                //layerStuck3.GetComponent<Image>().sprite = null;
+                EnemyStuck3.SetActive(false);
+                break;
+
+            case 3:
+                EnemyStuck1.GetComponent<Image>().sprite = EnemyStuck2.GetComponent<Image>().sprite;
+                EnemyStuck2.GetComponent<Image>().sprite = EnemyStuck3.GetComponent<Image>().sprite;
+                EnemyStuck3.GetComponent<Image>().sprite = EnemyStuck4.GetComponent<Image>().sprite;
+                //ayerStuck4.GetComponent<Image>().sprite = null;
+                EnemyStuck4.SetActive(false);
+                break;
         }
     }
 
@@ -186,7 +198,6 @@ public class UITest : MonoBehaviour {
             nPlayerStuckNum = 3;
         }
 
-        Debug.Log(nPlayerStuckNum);
         switch (nPlayerStuckNum)
         {
             case 0:
@@ -215,33 +226,6 @@ public class UITest : MonoBehaviour {
                 PlayerStuck4.SetActive(false);
                 break;
         }
-        //if (PlayerStuck2.activeSelf == true)
-        //{
-        //    PlayerStuck1.GetComponent<Image>().sprite = PlayerStuck2.GetComponent<Image>().sprite;
-        //    if (PlayerStuck3.activeSelf == false)
-        //    {
-        //        PlayerStuck2.SetActive(false);
-        //    }
-        //}
-        //else
-        //{
-        //    PlayerStuck1.SetActive(false);
-        //}
-
-        //if (PlayerStuck3.activeSelf == true)
-        //{
-        //    PlayerStuck2.GetComponent<Image>().sprite = PlayerStuck3.GetComponent<Image>().sprite;
-        //    if (PlayerStuck4.activeSelf == false)
-        //    {
-        //        PlayerStuck3.SetActive(false);
-        //    }
-        //}
-
-        //if (PlayerStuck4.activeSelf == true)
-        //{
-        //    PlayerStuck3.GetComponent<Image>().sprite = PlayerStuck4.GetComponent<Image>().sprite;
-        //    PlayerStuck4.SetActive(false);
-        //}
     }
 
     public void TurnTime(float num)

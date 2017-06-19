@@ -8,7 +8,7 @@ public class Character : MonoBehaviour {
     int nHP;
     int nAttack;
     //int nWeakness;
-    int nCharaNum;
+    int nCharaNum = 0;
     Type.Chara m_Type;
 
     
@@ -30,14 +30,15 @@ public class Character : MonoBehaviour {
     GameObject PlayerCharaObj1;
     GameObject PlayerCharaObj2;
     GameObject PlayerCharaObj3;
-    GameObject Enemy1Obj;
+    GameObject Enemy01Obj;
+    GameObject Enemy02Obj;
+    GameObject Enemy03Obj;
 
-    
+
     void Start(){
         //初期化関係
         nHP = 0;
         nAttack = 0;
-        nCharaNum = 0;
         //nWeakness = 0;
         m_Type = Type.Chara.Nothing;
         MyStartCharaPos = Vector3.zero;
@@ -89,15 +90,17 @@ public class Character : MonoBehaviour {
         GameObject Obj;
         switch (nCharaNum)
         {
-            case 0:
+            case 1:
                 switch (type) {
                     case Type.Chara.A:
                            Obj = Instantiate(PlayerCharaObj1, MyStartCharaPos, Quaternion.identity) as GameObject;
                            Obj.transform.parent = PlayerParentObj.transform;
                            playerscr = Obj.GetComponent<PlayerScr>();
                            playerscr.PlayerSwitch(nHP, nAttack, type);
+                        
                            charalist.PlayerCharaPut(Obj);
                         uitest.PlayerStuck(0);
+                        //Debug.Log("0,typeA");
                         break;
                     case Type.Chara.B:
                         Obj = Instantiate(PlayerCharaObj2, MyStartCharaPos, Quaternion.identity) as GameObject;
@@ -106,6 +109,7 @@ public class Character : MonoBehaviour {
                         playerscr.PlayerSwitch(nHP, nAttack, type);
                         charalist.PlayerCharaPut(Obj);
                         uitest.PlayerStuck(0);
+                        //Debug.Log("0,typeB");
                         break;
                     case Type.Chara.C:
                         Obj = Instantiate(PlayerCharaObj3, MyStartCharaPos, Quaternion.identity) as GameObject;
@@ -114,39 +118,10 @@ public class Character : MonoBehaviour {
                         playerscr.PlayerSwitch(nHP, nAttack, type);
                         charalist.PlayerCharaPut(Obj);
                         uitest.PlayerStuck(0);
+                        //Debug.Log("0,typeC");
                         break;
                 }
             break;
-            case 1:
-                switch (type)
-                {
-                    case Type.Chara.A:
-                        Obj = Instantiate(PlayerCharaObj1, MyStartCharaPos, Quaternion.identity) as GameObject;
-                        Obj.transform.parent = PlayerParentObj.transform;
-                        playerscr = Obj.GetComponent<PlayerScr>();
-                        playerscr.PlayerSwitch(nHP, nAttack, type);
-                        charalist.PlayerCharaPut(Obj);
-                        uitest.PlayerStuck(1);
-                        break;
-                    case Type.Chara.B:
-                        Obj = Instantiate(PlayerCharaObj2, MyStartCharaPos, Quaternion.identity) as GameObject;
-                        Obj.transform.parent = PlayerParentObj.transform;
-                        playerscr = Obj.GetComponent<PlayerScr>();
-                        playerscr.PlayerSwitch(nHP, nAttack, type);
-                        charalist.PlayerCharaPut(Obj);
-                        uitest.PlayerStuck(1);
-                        break;
-                    case Type.Chara.C:
-                        Obj = Instantiate(PlayerCharaObj3, MyStartCharaPos, Quaternion.identity) as GameObject;
-                        Obj.transform.parent = PlayerParentObj.transform;
-                        playerscr = Obj.GetComponent<PlayerScr>();
-                        playerscr.PlayerSwitch(nHP, nAttack, type);
-                        charalist.PlayerCharaPut(Obj);
-                        uitest.PlayerStuck(1);
-                        break;
-                }
-                break;
-
             case 2:
                 switch (type)
                 {
@@ -156,7 +131,41 @@ public class Character : MonoBehaviour {
                         playerscr = Obj.GetComponent<PlayerScr>();
                         playerscr.PlayerSwitch(nHP, nAttack, type);
                         charalist.PlayerCharaPut(Obj);
+                        uitest.PlayerStuck(1);
+                        //Debug.Log("1,typeA");
+                        break;
+                    case Type.Chara.B:
+                        Obj = Instantiate(PlayerCharaObj2, MyStartCharaPos, Quaternion.identity) as GameObject;
+                        Obj.transform.parent = PlayerParentObj.transform;
+                        playerscr = Obj.GetComponent<PlayerScr>();
+                        playerscr.PlayerSwitch(nHP, nAttack, type);
+                        charalist.PlayerCharaPut(Obj);
+                        uitest.PlayerStuck(1);
+                        //Debug.Log("1,typeB");
+                        break;
+                    case Type.Chara.C:
+                        Obj = Instantiate(PlayerCharaObj3, MyStartCharaPos, Quaternion.identity) as GameObject;
+                        Obj.transform.parent = PlayerParentObj.transform;
+                        playerscr = Obj.GetComponent<PlayerScr>();
+                        playerscr.PlayerSwitch(nHP, nAttack, type);
+                        charalist.PlayerCharaPut(Obj);
+                        uitest.PlayerStuck(1);
+                        //Debug.Log("1,typeC");
+                        break;
+                }
+                break;
+
+            case 3:
+                switch (type)
+                {
+                    case Type.Chara.A:
+                        Obj = Instantiate(PlayerCharaObj1, MyStartCharaPos, Quaternion.identity) as GameObject;
+                        Obj.transform.parent = PlayerParentObj.transform;
+                        playerscr = Obj.GetComponent<PlayerScr>();
+                        playerscr.PlayerSwitch(nHP, nAttack, type);
+                        charalist.PlayerCharaPut(Obj);
                         uitest.PlayerStuck(2);
+                        //Debug.Log("2,typeA");
                         break;
                     case Type.Chara.B:
                         Obj = Instantiate(PlayerCharaObj2, MyStartCharaPos, Quaternion.identity) as GameObject;
@@ -165,6 +174,7 @@ public class Character : MonoBehaviour {
                         playerscr.PlayerSwitch(nHP, nAttack, type);
                         charalist.PlayerCharaPut(Obj);
                         uitest.PlayerStuck(2);
+                        //Debug.Log("2,typeB");
                         break;
                     case Type.Chara.C:
                         Obj = Instantiate(PlayerCharaObj3, MyStartCharaPos, Quaternion.identity) as GameObject;
@@ -173,6 +183,7 @@ public class Character : MonoBehaviour {
                         playerscr.PlayerSwitch(nHP, nAttack, type);
                         charalist.PlayerCharaPut(Obj);
                         uitest.PlayerStuck(2);
+                        //Debug.Log("2,typeC");
                         break;
                 }
                 break;
@@ -182,8 +193,24 @@ public class Character : MonoBehaviour {
     public GameObject EnemyForm(int num){
         GameObject obj;
         switch (num){
-            case 0:
-                obj = Instantiate(Enemy1Obj, EnemyStartPos, Quaternion.identity) as GameObject;
+            case 1:
+                obj = Instantiate(Enemy01Obj, EnemyStartPos, Quaternion.identity) as GameObject;
+                obj.transform.parent = EnemyParentObj.transform;
+                charalist.EnemyCharaPut(obj);
+                GetData(num);
+                obj.GetComponent<EnemyScr>().Status(nHP, nAttack, m_Type, MyStartCharaPos);
+                return obj;
+
+            case 2:
+                obj = Instantiate(Enemy02Obj, EnemyStartPos, Quaternion.Euler(0,90,0)) as GameObject;
+                obj.transform.parent = EnemyParentObj.transform;
+                charalist.EnemyCharaPut(obj);
+                GetData(num);
+                obj.GetComponent<EnemyScr>().Status(nHP, nAttack, m_Type, MyStartCharaPos);
+                return obj;
+
+            case 3:
+                obj = Instantiate(Enemy03Obj, EnemyStartPos, Quaternion.identity) as GameObject;
                 obj.transform.parent = EnemyParentObj.transform;
                 charalist.EnemyCharaPut(obj);
                 GetData(num);
@@ -200,7 +227,9 @@ public class Character : MonoBehaviour {
         PlayerCharaObj2 = (GameObject)Resources.Load("Player/PlayerChara2");
         PlayerCharaObj3 = (GameObject)Resources.Load("Player/PlayerChara3");
 
-        Enemy1Obj = (GameObject)Resources.Load("Enemy/Enemy1");
+        Enemy01Obj = (GameObject)Resources.Load("Enemy/Enemy01");
+        Enemy02Obj = (GameObject)Resources.Load("Enemy/Enemy02");
+        Enemy03Obj = (GameObject)Resources.Load("Enemy/Enemy03");
     }
 
     // プレイヤーを外部から生成
@@ -218,8 +247,8 @@ public class Character : MonoBehaviour {
                 GetData(2);
                 break;
         }
-        CharaForm(type);
         nCharaNum = nStrong;
+        CharaForm(type);
     }
 
     public void DebugChara(){

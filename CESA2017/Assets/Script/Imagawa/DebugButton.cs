@@ -4,22 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DebugButton : MonoBehaviour {
-
-    public GameObject ParentObj1;
-    public GameObject ParentObj2;
-    public Text text;
+    
+    Text DebugTurntext;
     Text TurnText;
     Text DefeatText;
-    Slider slider;
     TurnSystem turnsystem;
     Character chara;
 
     private void Start(){
-        turnsystem = ParentObj1.GetComponent<TurnSystem>();
-        chara = ParentObj2.GetComponent<Character>();
-        slider = GameObject.Find("EnduranceValue").GetComponent<Slider>();
+        turnsystem = GameObject.Find("TurnObj").GetComponent<TurnSystem>();
+        chara = GameObject.Find("Chara").GetComponent<Character>();
+
         DefeatText = GameObject.Find("ENDTEXT").GetComponent<Text>();
-        TurnText = GameObject.Find("TrunText").GetComponent<Text>();
+        TurnText = GameObject.Find("TrunNumText").GetComponent<Text>();
+        DebugTurntext = GameObject.Find("DebugTurn").GetComponent<Text>();
     }
 
     private void Update()
@@ -29,21 +27,11 @@ public class DebugButton : MonoBehaviour {
 
     //ターンを次に進める
     public void DebugTrunSkip(){
-        turnsystem.TrunSkip();
         DebugTurn();
     }
     //キャラの生成
     public void DebugCharaInst(){
         chara.DebugChara();
-    }
-    //耐久値減らす
-    public void Endurance(float num)
-    {
-        slider.value -= num;
-        if(slider.value <= 0)
-        {
-            DefeatText.text = "負け";
-        }
     }
     //勝ち表示
     public void Win()
@@ -55,19 +43,19 @@ public class DebugButton : MonoBehaviour {
         string sTurn = turnsystem.SetTurnState().ToString();
         switch (sTurn){
             case "nNone":
-                text.text = "None";
+                DebugTurntext.text = "None";
             break;
             case "nEnemyForm":
-                text.text = "敵生成";
+                DebugTurntext.text = "敵生成";
             break;
             case "nMovePhase":
-                text.text = "移動";
+                DebugTurntext.text = "移動";
                 break;
             case "nInterposePhase":
-                text.text = "挟む";
+                DebugTurntext.text = "挟む";
                 break;
             case "nBattlePhase":
-                text.text = "バトル";
+                DebugTurntext.text = "バトル";
                 break;
         }
     }

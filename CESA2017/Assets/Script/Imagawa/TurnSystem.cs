@@ -12,7 +12,6 @@ public class TurnSystem : MonoBehaviour
         nEnemyForm,         //敵生成
         nMovePhase,         //移動
         nInterposePhase,    //挟む
-        nBattlePhase        //バトル
     }
     [Header("enumのターン系")]
     public TurnState turnstate;
@@ -95,6 +94,7 @@ public class TurnSystem : MonoBehaviour
     //スタック
     bool StuckFlg = false;
     bool UITimeFlg = false;
+    bool EnemyStuckFlg = false;
 
 
     private void Awake()
@@ -187,7 +187,7 @@ public class TurnSystem : MonoBehaviour
                     EnemyStuck();
                 }
 
-                if (TurnTime >= 2)
+                if (TurnTime >= 0.5f)
                 {
                     turnstate++;
                     TurnTime = 0;
@@ -218,7 +218,7 @@ public class TurnSystem : MonoBehaviour
                             EnemyMoveOkList.Add(character.EnemyForm(0));
                             
                             bFormEnd = true;
-                            
+                            Debug.Log("ランダム");
                         }
                         bRandomFormFlg = true;
                     }
@@ -226,9 +226,9 @@ public class TurnSystem : MonoBehaviour
                 else
                 {
                     nEvacuate = int.Parse(StageEnemyData[nTurn][0]);
-                    if (nEvacuate == 0 && !bFormEnd)
+                    if (nEvacuate != 0 && !bFormEnd)
                     {
-                        EnemyMoveOkList.Add(character.EnemyForm(0));
+                        EnemyMoveOkList.Add(character.EnemyForm(nEvacuate));
                         uitest.EnemySortie();
                         bFormEnd = true;
                     }
@@ -264,37 +264,18 @@ public class TurnSystem : MonoBehaviour
 
                 if (TurnTime >= 5)
                 {
-                    turnstate++;
-                    TurnTime = 0;
-                }
-                break;
-            //バトルフェーズ
-            case TurnState.nBattlePhase:
-                TurnTime += Time.deltaTime;
-
-                if (TurnTime >= 2.5f)
-                {
                     turnstate = TurnState.nEnemyForm;
-                    nTurn++;
                     DButton.TurnNum(nTurn);
                     bFormEnd = false;
                     TurnTime = 0;
+                    nTurn++;
+
+                    StuckFlg = true;
+                    EnemyStuck();
+
                 }
                 break;
         }
-
-        //デバッグコマンド
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            turnstate++;
-            if (turnstate > TurnState.nBattlePhase)
-            {
-                turnstate = TurnState.nNone;
-                nTurn++;
-                bFormEnd = false;
-            }
-        }
-
     }
 
 
@@ -309,7 +290,7 @@ public class TurnSystem : MonoBehaviour
                     PlayerMoveOkList.RemoveAt(i);
                     continue;
                 }
-                PlayerMoveOkList[i].GetComponent<PlayerScr>().MovePhasePlus(new Vector3(PlayerMoveOkList[i].transform.position.x - 1.5f, PlayerMoveOkList[i].transform.position.y, PlayerMoveOkList[i].transform.position.z), 2);
+                PlayerMoveOkList[i].GetComponent<PlayerScr>().MovePhasePlus(new Vector3(PlayerMoveOkList[i].transform.position.x - 2.2f, PlayerMoveOkList[i].transform.position.y, PlayerMoveOkList[i].transform.position.z), 2);
             }
             //敵キャラの移動
             for (int i = 0; i < EnemyMoveOkList.Count; i++)
@@ -649,13 +630,25 @@ public class TurnSystem : MonoBehaviour
 
     void EnemyStuck()
     {
-        for(int i = nTurn; i < nTurn + 3; i++)
+        if (EnemyStuckFlg)
         {
-            nEvacuate = int.Parse(StageEnemyData[i][0]);
-            if (nEvacuate == 0)
+            nEvacuate = int.Parse(StageEnemyData[nTurn + 3][0]);
+            if (nEvacuate != 0)
             {
                 uitest.EnemyStuck(nEvacuate);
             }
+        }
+        if (!EnemyStuckFlg)
+        {
+            for (int i = nTurn; i < nTurn + 3; i++)
+            {
+                nEvacuate = int.Parse(StageEnemyData[i][0]);
+                if (nEvacuate != 0)
+                {
+                    uitest.EnemyStuck(nEvacuate);
+                }
+            }
+            EnemyStuckFlg = true;
         }
     }//敵のスタック
 
@@ -733,17 +726,6 @@ public class TurnSystem : MonoBehaviour
     void GetDirection()
     {
     }//フリックされた方向取得関数(未実装)
-
-    public void TrunSkip()
-    {
-        turnstate++;
-        if (turnstate > TurnState.nBattlePhase)
-        {
-            turnstate = TurnState.nNone;
-            nTurn++;
-            bFormEnd = false;
-        }
-    }//1フェーズ進める
 
     public TurnState SetTurnState()
     {
