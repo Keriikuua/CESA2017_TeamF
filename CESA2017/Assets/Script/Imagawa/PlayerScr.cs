@@ -29,7 +29,6 @@ public class PlayerScr : MonoBehaviour {
         turnsystem = GameObject.Find("TurnObj").GetComponent<TurnSystem>();
 
         turnsystem.PlayerStuckIn(this.gameObject);
-        this.gameObject.tag = "UpPlayer";
     }
 
     
@@ -49,7 +48,7 @@ public class PlayerScr : MonoBehaviour {
     void Update(){
         MovePlayer();
 
-        if(transform.position.x <= 99.0f)
+        if(transform.position.x <= 93.0f)
         {
             Destroy(this.gameObject);
         }

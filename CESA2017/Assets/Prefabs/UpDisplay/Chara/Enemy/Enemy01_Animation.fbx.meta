@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 0ecdfebafb12781478bf1cc42eec29ed
-timeCreated: 1497575007
+guid: 8d361bbe30d169d458ba50e9ca24eb7f
+timeCreated: 1498012988
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -53,7 +53,7 @@ ModelImporter:
     4300006: reg5
     4300008: reg6
     7400000: Enemy01_Waite
-    7400002: Enemy01_Attack
+    7400002: Enemy_Attack
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -139,10 +139,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Enemy01_Attack
+      name: Enemy_Attack
       takeName: Enemy01_Animation_bake
       firstFrame: 30
-      lastFrame: 60
+      lastFrame: 90
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

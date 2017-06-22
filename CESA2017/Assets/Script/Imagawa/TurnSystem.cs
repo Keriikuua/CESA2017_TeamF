@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class TurnSystem : MonoBehaviour
 {
@@ -30,9 +29,6 @@ public class TurnSystem : MonoBehaviour
     [SerializeField]
     [Header("プレイヤーの移動可能オブジェ")]
     List<GameObject> PlayerMoveOkList = new List<GameObject>();              //プレイヤーの移動可能オブジェ
-    //[SerializeField]
-    //[Header("レーン移動しているプレイヤーオブジェ")]
-    //List<GameObject> PlayerMoveList = new List<GameObject>();               //レーン移動しているプレイヤーオブジェ
 
     [SerializeField]
     [Header("左右の移動待ちオブジェ")]
@@ -59,7 +55,9 @@ public class TurnSystem : MonoBehaviour
     FieldManager fildmane;
     DebugButton DButton;
     UITest uitest;
-
+    FieldManager MapData;
+    
+    
    
     Vector3[] PlayerRighitLeftPosition = new Vector3[2];                //左右の自キャラが待機する座標
     Vector3 PlayerWaitePosition;                                        //左右移動前の待機場所
@@ -96,12 +94,16 @@ public class TurnSystem : MonoBehaviour
     bool UITimeFlg = false;
     bool EnemyStuckFlg = false;
 
+    //加速関係
+    int acceleNum = 0;
+
+    //壁の生成
+    bool WallOnFlg;
+    public GameObject WallObj;
 
     private void Awake()
     {
 
-        AddTag("UpEnemy");
-        AddTag("UpPlayer");
     }
 
 
@@ -111,7 +113,8 @@ public class TurnSystem : MonoBehaviour
         bFormEnd = false;
         bHasamuFlg = false;
         bRandomFormFlg = false;
-        nTurn = 0;
+        WallOnFlg = false;
+        nTurn = 1;
         nCorrect = 0;
         TurnTime = 0;
 
@@ -119,6 +122,7 @@ public class TurnSystem : MonoBehaviour
         fildmane = GameObject.Find("MapData").GetComponent<FieldManager>();
         DButton = GameObject.Find("Button").GetComponent<DebugButton>();
         uitest = GameObject.Find("UI").GetComponent<UITest>();
+        MapData = GameObject.Find("MapData").GetComponent<FieldManager>();
         stageform = GetComponent<StageForm>();
         StageEnemyData = stageform.StageData_Enemy();
 
@@ -126,6 +130,8 @@ public class TurnSystem : MonoBehaviour
         PlayerRighitLeftPosition[0] = fildmane.SetMyRightCharaPos();
         PlayerRighitLeftPosition[1] = fildmane.SetMyLeftCharaPos();
         PlayerWaitePosition = fildmane.SetMyWaiteCharaPos();
+
+        
     }
 
 
@@ -191,6 +197,7 @@ public class TurnSystem : MonoBehaviour
                 {
                     turnstate++;
                     TurnTime = 0;
+                    DButton.TurnNum(nTurn);
                     StuckFlg = false;
                 }
 
@@ -201,12 +208,12 @@ public class TurnSystem : MonoBehaviour
             //敵生成フェーズ
             case TurnState.nEnemyForm:
                 TurnTime += Time.deltaTime;
-                if (TurnTime >= 2)
+                if (TurnTime >= 3)
                 {
+                    uitest.TimeUIActive();
                     turnstate++;
                     TurnTime = 0;
                 }
-
 
                 if (StageEnemyData.Count <= nTurn)
                 {
@@ -225,7 +232,14 @@ public class TurnSystem : MonoBehaviour
                 }
                 else
                 {
-                    nEvacuate = int.Parse(StageEnemyData[nTurn][0]);
+                    //壁の生成
+                    if (!WallOnFlg)
+                    {
+                        WallCreate();
+                        WallOnFlg = true;
+                    }
+
+                    nEvacuate = int.Parse(StageEnemyData[nTurn - 1][0]);
                     if (nEvacuate != 0 && !bFormEnd)
                     {
                         EnemyMoveOkList.Add(character.EnemyForm(nEvacuate));
@@ -243,13 +257,9 @@ public class TurnSystem : MonoBehaviour
                     MovePhase();
                 }
                 TurnTime += Time.deltaTime;
-                if (!UITimeFlg)
-                {
-                    uitest.TurnTime(5);
-                    UITimeFlg = true;
-                }
 
-                if (TurnTime >= 5)
+
+                if (TurnTime >= 3)
                 {
                     turnstate++;
                     MoveFlg = false;
@@ -262,7 +272,13 @@ public class TurnSystem : MonoBehaviour
                 InterposePhase();
                 TurnTime += Time.deltaTime;
 
-                if (TurnTime >= 0.1f)
+                if (!UITimeFlg)
+                {
+                    uitest.TurnTime(5);
+                    UITimeFlg = true;
+                }
+
+                if (TurnTime >= 5.0f)
                 {
                     turnstate = TurnState.nEnemyForm;
                     DButton.TurnNum(nTurn);
@@ -272,7 +288,7 @@ public class TurnSystem : MonoBehaviour
 
                     StuckFlg = true;
                     EnemyStuck();
-
+                    WallOnFlg = false;
                 }
                 break;
         }
@@ -282,6 +298,8 @@ public class TurnSystem : MonoBehaviour
     //移動フェーズ
     void MovePhase()
     {
+        if (acceleNum == 0)
+        {
             //プレイヤーの移動
             for (int i = 0; i < PlayerMoveOkList.Count; i++)
             {
@@ -292,19 +310,34 @@ public class TurnSystem : MonoBehaviour
                 }
                 PlayerMoveOkList[i].GetComponent<PlayerScr>().MovePhasePlus(new Vector3(PlayerMoveOkList[i].transform.position.x - 2.2f, PlayerMoveOkList[i].transform.position.y, PlayerMoveOkList[i].transform.position.z), 2);
             }
-            //敵キャラの移動
-            for (int i = 0; i < EnemyMoveOkList.Count; i++)
+        }else{
+            //プレイヤーの移動
+            for (int i = 0; i < PlayerMoveOkList.Count; i++)
             {
-                if (EnemyMoveOkList[i] == null)
+                if (PlayerMoveOkList[i] == null)
                 {
-                    EnemyMoveOkList.RemoveAt(i);
+                    PlayerMoveOkList.RemoveAt(i);
                     continue;
                 }
-                EnemyMoveOkList[i].GetComponent<EnemyScr>().MoveOn();
-                //EnemyMoveOkList[i].transform.position += new Vector3(1.5f, 0, 0);
+                PlayerMoveOkList[i].GetComponent<PlayerScr>().MovePhasePlus(new Vector3(PlayerMoveOkList[i].transform.position.x - 2.2f * acceleNum, PlayerMoveOkList[i].transform.position.y, PlayerMoveOkList[i].transform.position.z), 2);
             }
-            MoveFlg = true;
 
+            acceleNum = 0;
+        }
+        //敵キャラの移動
+        for (int i = 0; i < EnemyMoveOkList.Count; i++)
+        {
+            if (EnemyMoveOkList[i] == null)
+            {
+                EnemyMoveOkList.RemoveAt(i);
+                continue;
+            }
+            EnemyMoveOkList[i].GetComponent<EnemyScr>().MoveOn();
+            //EnemyMoveOkList[i].transform.position += new Vector3(1.5f, 0, 0);
+        }
+
+        MoveFlg = true;
+        
     }
  
     void InterposePhase()
@@ -401,14 +434,7 @@ public class TurnSystem : MonoBehaviour
                 if (pos.z != SecondTuchObj[v].transform.position.z)
                 {
                     //横かどうか判定
-                    if (pos.x == SecondTuchObj[v].transform.position.x) { 
-
-                        if (InterposeObj[0] != null)
-                        {
-
-                            InterposeObj[0].GetComponent<Renderer>().material.color = Color.white;
-                            InterposeObj[1].GetComponent<Renderer>().material.color = Color.white;
-                        }
+                    if (pos.x <= SecondTuchObj[v].transform.position.x + 0.5f && pos.x >= SecondTuchObj[v].transform.position.x - 0.5f ) { 
                     
                         //ゼロが左でイチが右
                         if (SecondTuchObj[v].transform.position.z < pos.z)
@@ -424,19 +450,11 @@ public class TurnSystem : MonoBehaviour
 
                         }
 
-                        InterposeObj[0].GetComponent<Renderer>().material.color = Color.red;
-                        InterposeObj[1].GetComponent<Renderer>().material.color = Color.red;
                         break;
                     }
                     //斜め判定
                     if (pos.x + 3 == SecondTuchObj[v].transform.position.x || pos.x - 3 == SecondTuchObj[v].transform.position.x)
                     {
-                        if (InterposeObj[0] != null)
-                        {
-
-                            InterposeObj[0].GetComponent<Renderer>().material.color = Color.white;
-                            InterposeObj[1].GetComponent<Renderer>().material.color = Color.white;
-                        }
                         //ゼロが左でイチが右
                         if (SecondTuchObj[v].transform.position.z < pos.z)
                         {
@@ -450,9 +468,6 @@ public class TurnSystem : MonoBehaviour
                             InterposeObj[0] = SecondTuchObj[v].transform.gameObject;
 
                         }
-
-                        InterposeObj[0].GetComponent<Renderer>().material.color = Color.red;
-                        InterposeObj[1].GetComponent<Renderer>().material.color = Color.red;
                     }
                     break;
                 }
@@ -516,8 +531,8 @@ public class TurnSystem : MonoBehaviour
                     //}
                 }
                 HasamuMoveFlg = false;
-                Destroy(InterposeObj[0]);
-                Destroy(InterposeObj[1]);
+                //Destroy(InterposeObj[0]);
+                //Destroy(InterposeObj[1]);
                 InterposeObj[0] = null;
                 InterposeObj[1] = null;
                 nCorrect = 0;
@@ -602,38 +617,10 @@ public class TurnSystem : MonoBehaviour
 
     }//バトルフェーズ
 
-
-    static void AddTag(string tagname)
-    {
-        UnityEngine.Object[] asset = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset");
-        if ((asset != null) && (asset.Length > 0))
-        {
-            SerializedObject so = new SerializedObject(asset[0]);
-            SerializedProperty tags = so.FindProperty("tags");
-
-            for (int i = 0; i < tags.arraySize; ++i)
-            {
-                if (tags.GetArrayElementAtIndex(i).stringValue == tagname)
-                {
-                    return;
-                }
-            }
-
-            int index = tags.arraySize;
-            tags.InsertArrayElementAtIndex(index);
-            tags.GetArrayElementAtIndex(index).stringValue = tagname;
-            so.ApplyModifiedProperties();
-            so.Update();
-        }
-    }//タグ生成関数
-
-
     void EnemyStuck()
     {
         if (EnemyStuckFlg)
         {
-            Debug.Log(StageEnemyData.Count);
-            Debug.Log(nTurn + "ターン");
             if (StageEnemyData.Count > nTurn + 2)
             {
                 nEvacuate = int.Parse(StageEnemyData[nTurn + 2][0]);
@@ -763,9 +750,31 @@ public class TurnSystem : MonoBehaviour
         }
     }
 
+    void WallCreate()
+    {
+        int LeftNum = int.Parse(StageEnemyData[nTurn - 1][1]);
+        int RightNum = int.Parse(StageEnemyData[nTurn - 1][2]);
+        if (LeftNum != 0)
+        {
+            Vector3 pos = MapData.MapDataPullOut(LeftNum, 1);
+            Instantiate(WallObj, pos, Quaternion.identity);
+        }
+
+        if (RightNum != 0)
+        {
+            Vector3 pos = MapData.MapDataPullOut(RightNum, 3);
+            Instantiate(WallObj, pos, Quaternion.identity);
+        }
+    }
+
     public void SutuckUIDelete()
     {
         uitest.PlayerSortie();
     }
+
+    public void AcceleFullyOpen()
+    {
+        acceleNum++;
+    }//加速ボタンが押されたらここを呼ぶ
 
 }

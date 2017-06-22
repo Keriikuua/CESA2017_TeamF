@@ -71,4 +71,9 @@ public class DebugButton : MonoBehaviour {
         turnsystem.DeleteStuck();
     }
 
+    public void AcceleButton()
+    {
+        turnsystem.AcceleFullyOpen();
+    }
+
 }

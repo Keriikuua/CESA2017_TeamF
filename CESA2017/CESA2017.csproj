@@ -85,8 +85,10 @@
     <Compile Include="Assets\Script\Imagawa\DebugButton.cs" />
     <Compile Include="Assets\Script\Imagawa\Endurance.cs" />
     <Compile Include="Assets\Script\Imagawa\EnemyScr.cs" />
+    <Compile Include="Assets\Script\Imagawa\GarbageScript.cs" />
     <Compile Include="Assets\Script\Imagawa\PlayerScr.cs" />
     <Compile Include="Assets\Script\Imagawa\StageForm.cs" />
+    <Compile Include="Assets\Script\Imagawa\StateMachinBehaviourAttack.cs" />
     <Compile Include="Assets\Script\Imagawa\TurnSystem.cs" />
     <Compile Include="Assets\Script\Imagawa\UITest.cs" />
     <Compile Include="Assets\Script\Imagawa\animeTest.cs" />
