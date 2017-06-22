@@ -24,7 +24,6 @@ public class EnemyScr : MonoBehaviour {
 
     private void Start()
     {
-        this.gameObject.tag = "UpEnemy";
         hitobj = new GameObject[2];
         bEndflg = false;
         bMoveFlg = false;
@@ -32,7 +31,7 @@ public class EnemyScr : MonoBehaviour {
 
     private void Update()
     {
-        if(this.transform.position.x + 0.5f >= GoalPos.x)
+        if(this.transform.position.x >= GoalPos.x - 5.0f)
         {
             if (!bEndflg)
             {
@@ -41,6 +40,7 @@ public class EnemyScr : MonoBehaviour {
                 GameObject.Find("UI").GetComponent<UITest>().Life();
                 GameObject.Find("TurnObj").GetComponent<TurnSystem>().EnemyDowun();
                 this.gameObject.GetComponent<Animator>().SetBool("AttackFlg",true);
+                bEndflg = true;
                 //Destroy(this.gameObject);
                 //bEndflg = true;
             }
@@ -95,6 +95,11 @@ public class EnemyScr : MonoBehaviour {
             Debug.Log(hitobj[0].name +"" + hitobj[1].name);
             GameObject.Find("TurnObj").GetComponent<TurnSystem>().BattlePhase(hitobj[0], hitobj[1], this.gameObject);
         }
+    }
+
+    public void MyDestroy()
+    {
+        Destroy(this.gameObject);
     }
 
     void OnCollisionEnter(Collision coll)

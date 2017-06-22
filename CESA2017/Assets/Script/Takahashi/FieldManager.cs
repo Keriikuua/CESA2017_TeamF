@@ -77,4 +77,9 @@ public class FieldManager : MonoBehaviour
         return obj.transform.position;
     }
 
+    public Vector3 MapDataPullOut(int num,int num2)
+    {
+        return FieldList[num][num2].transform.position;
+    }
+
 }
